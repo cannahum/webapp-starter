@@ -60,3 +60,5 @@ typings/
 # IntelliJ
 .idea
 *.iml
+
+dist/
