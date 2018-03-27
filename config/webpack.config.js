@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./src/client/index.tsx",
+  entry: "./src/client/index.js",
 
   output: {
     filename: "bundle.js",
@@ -25,6 +25,10 @@ module.exports = {
         },
       },
       {
+        test:/\.jsx?$/,
+        loader: 'babel-loader',
+      },
+      {
         test: /\.scss$/,
         use: [{
           loader: "style-loader" // creates style nodes from JS strings
@@ -36,6 +40,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-  ]
+  plugins: []
 };

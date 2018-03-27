@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
+import express, { Request, Response } from 'express';
 import path from 'path';
 
 const basePath: string = path.resolve(__dirname, '../../');
