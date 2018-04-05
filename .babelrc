@@ -6,6 +6,14 @@
   ],
   "plugins": [
     "transform-es2015-modules-commonjs",
-    "transform-async-to-generator"
+    "transform-async-to-generator",
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
   ]
 }
