@@ -17,7 +17,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class Counter extends React.Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Counter extends React.Component {
   render() {
     const {counter, actions: {increment, decrement}} = this.props;
     return (
@@ -32,5 +33,3 @@ class Counter extends React.Component {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
