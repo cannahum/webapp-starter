@@ -7,6 +7,8 @@
   "plugins": [
     "transform-es2015-modules-commonjs",
     "transform-async-to-generator",
+    "babel-plugin-transform-decorators-legacy",
+    "babel-plugin-transform-decorators",
     [
       "transform-runtime",
       {

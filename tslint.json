@@ -7,7 +7,10 @@
   "rules": {
     "no-console": false,
     "quotemark": [true, "single", "jsx-double"],
-    "ordered-imports": [false]
+    "ordered-imports": [false],
+    "no-namespace": [false],
+    "object-literal-sort-keys": false,
+    "one-line": [false]
   },
   "rulesDirectory": []
 }
