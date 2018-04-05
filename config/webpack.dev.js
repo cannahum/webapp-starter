@@ -17,6 +17,8 @@ module.exports = Object.assign({}, baseConfig, {
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
+    'redux': 'Redux',
+    'react-redux': 'ReactRedux',
     'react-router': 'ReactRouter'
   }
 });

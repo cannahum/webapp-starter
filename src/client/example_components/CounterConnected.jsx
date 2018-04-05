@@ -22,7 +22,7 @@ class Counter extends React.Component {
     const {counter, actions: {increment, decrement}} = this.props;
     return (
       <div>
-        <h2>Connected Counter Component</h2>
+        <h2>Counter Component</h2>
         <h3>Current Counter: {`${counter.counter}`}</h3>
         <div>
           <button onClick={e => increment(1)}>Increment</button>
