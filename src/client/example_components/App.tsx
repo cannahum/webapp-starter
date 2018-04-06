@@ -1,6 +1,7 @@
 import React from 'react';
 import AsyncComp from './AsyncComp';
 import Counter from './CounterConnected';
+import Link from './Link';
 
 export default class App extends React.Component<{}, {}> {
   public render() {
@@ -11,6 +12,7 @@ export default class App extends React.Component<{}, {}> {
         <div>
           <Counter/>
         </div>
+        <Link>Hover over me</Link>
       </div>
     );
   }
