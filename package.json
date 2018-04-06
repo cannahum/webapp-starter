@@ -64,7 +64,7 @@
     "start": "ts-node src/index.ts",
     "build": "webpack --config config/webpack.dev.js",
     "build:watch": "webpack-dev-server --config config/webpack.dev-server.js",
-    "build:prod": "webpack --config config/webpack.prod.js",
+    "build:prod": "webpack -p --config config/webpack.prod.js",
     "test": "jest"
   }
 }

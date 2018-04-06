@@ -1,8 +1,9 @@
 import React from 'react';
+import {isNull} from 'util';
 
 interface IAppState {
   dynamicComponentsHaveLoaded: boolean;
-  components: JSX.Element[];
+  components: null | JSX.Element[];
 }
 
 export default class App extends React.Component<any, IAppState> {
@@ -11,7 +12,7 @@ export default class App extends React.Component<any, IAppState> {
 
     this.state = {
       dynamicComponentsHaveLoaded: false,
-      components: [],
+      components: null,
     };
   }
 
@@ -20,11 +21,14 @@ export default class App extends React.Component<any, IAppState> {
   }
 
   public render() {
-    console.log(this.state);
+    const {components} = this.state;
+    if (isNull(components)) {
+      return <h2>Loading...</h2>;
+    }
     return (
       <div>
         {
-          this.state.components.map((Comp: any) => {
+          components.map((Comp: any) => {
             return <Comp/>;
           })
         }
@@ -32,11 +36,13 @@ export default class App extends React.Component<any, IAppState> {
     );
   }
 
-  private async loadDynamicComponents(): Promise<void> {
-    const comp: any = await import('./example_app/App');
-    this.setState({
-      dynamicComponentsHaveLoaded: true,
-      components: [comp.default as JSX.Element],
-    });
+  private loadDynamicComponents(): void {
+    setTimeout(async () => {
+      const comp: any = await import('./example_app/App');
+      this.setState({
+        dynamicComponentsHaveLoaded: true,
+        components: [comp.default as JSX.Element],
+      });
+    }, 1 * 1000);
   }
 }

@@ -8,7 +8,10 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: 'dist',
   },
-
+  optimization: {
+    runtimeChunk: true,
+    splitChunks: {chunks: 'all'},
+  },
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
