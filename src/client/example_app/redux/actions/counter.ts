@@ -1,3 +1,4 @@
+/// <reference path="./actions.d.ts" />
 import IAction = WebAppReduxActions.IAction;
 
 export enum CounterTypes {

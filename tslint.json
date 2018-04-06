@@ -10,7 +10,8 @@
     "ordered-imports": [false],
     "no-namespace": [false],
     "object-literal-sort-keys": false,
-    "one-line": [false]
+    "one-line": [false],
+    "no-reference": false
   },
   "rulesDirectory": []
 }

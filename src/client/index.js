@@ -3,12 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import './index.scss';
-import App from './example_components/App';
-import {store} from "./redux";
+import {default as ExampleApp} from './example_app/App';
+import {store} from "./example_app/redux";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <ExampleApp/>
   </Provider>,
   document.getElementById('target'),
 );

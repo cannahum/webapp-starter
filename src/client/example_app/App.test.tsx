@@ -4,7 +4,7 @@ import TestUtils from 'react-dom/test-utils';
 import {configure, shallow, ShallowWrapper} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
-import AsyncComp from './AsyncComp';
+import AsyncComp from './components/AsyncComp';
 
 configure({ adapter: new Adapter() });
 

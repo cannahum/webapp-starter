@@ -1,7 +1,7 @@
 import React from 'react';
-import AsyncComp from './AsyncComp';
-import Counter from './CounterConnected';
-import Link from './Link';
+import AsyncComp from './components/AsyncComp';
+import Counter from './components/CounterConnected';
+import Link from './components/Link';
 
 export default class App extends React.Component<{}, {}> {
   public render() {
