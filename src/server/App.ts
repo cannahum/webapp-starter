@@ -1,7 +1,11 @@
 import * as bodyParser from 'body-parser';
 import express, {Request, Response} from 'express';
+import {GraphQLSchema} from 'graphql';
+import ExpressGraphQL from 'express-graphql';
 import path from 'path';
+import Chalk from 'chalk';
 import DB from './db/DB';
+import schemaBuilder from './graphql/schema';
 
 const basePath: string = path.resolve(__dirname, '../../');
 const indexHtml: string = path.resolve(basePath, 'dist/index.html');
@@ -16,15 +20,27 @@ class App {
     this.mountRoutes();
   }
 
-  private mountRoutes(): void {
+  private async mountRoutes(): Promise<void> {
     const router = express.Router();
     this.express.use(bodyParser.json());
     router.get('/', (req: Request, res: Response) => {
       res.sendFile(indexHtml);
     });
-    this.express.use('/', router);
-    this.express.use('/dist', express.static('dist'));
-    this.express.use('/assets', express.static('assets'));
+    try {
+      const schema: GraphQLSchema = await schemaBuilder();
+      this.express.use('/', router);
+      this.express.use('/dist', express.static('dist'));
+      this.express.use('/assets', express.static('assets'));
+      this.express.use('/graphql', ExpressGraphQL({
+        schema,
+        graphiql: true,
+      }));
+    }
+    catch (e) {
+      console.log(Chalk.red('Could not build graphql schema'));
+      console.log(Chalk.red(e));
+      process.exit(1);
+    }
   }
 
   private async getDBConnection() {
