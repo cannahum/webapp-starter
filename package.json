@@ -9,17 +9,20 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-connect-decorator": "^0.2.0",
-    "ts-node": "^5.0.1"
+    "ts-node": "^5.0.1",
+    "typeorm": "^0.1.20"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.8",
     "@types/chai": "^4.1.2",
+    "@types/dotenv": "^4.0.3",
     "@types/enzyme": "^3.1.9",
     "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/express": "^4.11.1",
@@ -62,9 +65,10 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
+    "start:dev": "export NODE_ENV=dev && ts-node src/index.ts",
+    "test": "export NODE_ENV=test && jest",
     "build": "webpack --config config/webpack.dev.js",
     "build:watch": "webpack-dev-server --config config/webpack.dev-server.js",
-    "build:prod": "webpack -p --config config/webpack.prod.js",
-    "test": "jest"
+    "build:prod": "webpack -p --config config/webpack.prod.js"
   }
 }
