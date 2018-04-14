@@ -25,9 +25,6 @@ class App {
     this.express.use('/', router);
     this.express.use('/dist', express.static('dist'));
     this.express.use('/assets', express.static('assets'));
-
-    // Test
-    this.getDBConnection();
   }
 
   private async getDBConnection() {
@@ -37,7 +34,7 @@ class App {
       console.log('app:getDBConnection:success');
     }
     catch (e) {
-      console.log('app:getDBConnection:error');
+      console.log('app:getDBConnection:erraor');
       console.log(e);
     }
   }
