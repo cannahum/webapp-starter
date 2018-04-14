@@ -1,13 +1,21 @@
 import {Resolver, Query} from 'type-graphql';
+import DB from '../../db/DB';
 import {Person} from '../../models/Person';
+import {Repository, Connection} from 'typeorm';
 
 @Resolver()
 class PersonResolver {
-  private readonly personCollection: Person[] = [
-  ];
 
   @Query((returns) => [Person])
   public async users(): Promise<Person[]> {
-    return this.personCollection;
+    const db = DB.getInstance();
+    const conn: Connection = await db.getConnection();
+    const repo: Repository<Person> = conn.getRepository(Person);
+    try {
+      return await repo.find();
+    }
+    catch (e) {
+      throw new Error(e);
+    }
   }
 }
