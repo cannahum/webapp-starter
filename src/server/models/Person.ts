@@ -2,14 +2,24 @@ import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import {ID, Field, ObjectType, registerEnumType} from 'type-graphql';
 
 export enum AccountType {
-  email,
-  google,
-  facebook,
+  EMAIL,
+  GOOGLE,
+  FACEBOOK,
+}
+
+export enum AuthLevel {
+  REGULAR,
+  ADMIN,
 }
 
 registerEnumType(AccountType, {
   name: 'AccountType',
   description: 'Email & Password, or Oauth perhaps...',
+});
+
+registerEnumType(AuthLevel, {
+  name: 'AuthLevel',
+  description: 'Regular or Admin',
 });
 
 @ObjectType()
@@ -32,13 +42,22 @@ export class Person {
   })
   public profilePictureLink: string;
 
-  @Field((type) => AccountType)
+  @Field()
   @Column({
     nullable: false,
   })
   public username: string;
 
-  @Field()
+  @Column({
+    nullable: true,
+  })
+  public password: string;
+
+  @Field((type) => AccountType)
   @Column()
   public accountType: AccountType;
+
+  @Field((type) => AuthLevel)
+  @Column()
+  public authLevel: AuthLevel;
 }
