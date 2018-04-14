@@ -7,7 +7,7 @@ export enum AccountType {
 }
 
 @Entity()
-export class User {
+export class Person {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -15,7 +15,7 @@ export class User {
     nullable: false,
     unique: true,
   })
-  public readonly emailAddress: string;
+  public emailAddress: string;
 
   @Column({
     nullable: true,

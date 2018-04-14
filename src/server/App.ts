@@ -35,7 +35,6 @@ class App {
     try {
       const conn = await this.db.getConnection();
       console.log('app:getDBConnection:success');
-      console.log(conn);
     }
     catch (e) {
       console.log('app:getDBConnection:error');
