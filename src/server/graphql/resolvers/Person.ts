@@ -3,8 +3,6 @@ import {Repository, Connection} from 'typeorm';
 import DB from '../../db/DB';
 import {AccountType, AuthLevel, Person} from '../../models/Person';
 import {NewPersonInputData} from './args/NewPersonInputData';
-import {Simulate} from 'react-dom/test-utils';
-import input = Simulate.input;
 
 @Resolver()
 class PersonResolver {
