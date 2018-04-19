@@ -1,10 +1,14 @@
-import {Resolver, Query, Mutation, Args, Arg} from 'type-graphql';
 import {Repository, Connection} from 'typeorm';
+import {Resolver, Query, Mutation, Arg, Ctx} from 'type-graphql';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import {AppContext} from "../../App";
 import DB from '../../db/DB';
 import {AccountType, AuthLevel, Person} from '../../models/Person';
 import {NewPersonInputData} from './args/NewPersonInputData';
-import {Simulate} from 'react-dom/test-utils';
-import input = Simulate.input;
+import {LoginInputData} from './args/LoginInputData';
+
 
 @Resolver()
 class PersonResolver {
@@ -28,7 +32,7 @@ class PersonResolver {
     const p = new Person();
     p.username = username;
     p.emailAddress = emailAddress;
-    p.password = password;
+    p.password = await bcrypt.hash(password, DB.COMPLIANCE.BCRYPT_SALT_ROUNDS);
     p.accountType = AccountType.EMAIL;
     p.profilePictureLink = profilePictureLink;
     p.authLevel = AuthLevel.REGULAR;
@@ -42,5 +46,44 @@ class PersonResolver {
     catch (e) {
       throw new Error(e);
     }
+  }
+
+  @Mutation((returns) => String)
+  public async login(@Arg('loginInput') inputData: LoginInputData,
+                     @Ctx() ctx: AppContext,): Promise<string> {
+    // Find the user...
+    let conn: Connection;
+    try {
+      const db = DB.getInstance();
+      conn = await db.getConnection();
+    }
+    catch (e) {
+      throw new Error(e);
+    }
+    const repo: Repository<Person> = conn.getRepository(Person);
+    let users: Person[] = await repo.find({
+      emailAddress: inputData.emailAddress,
+    });
+
+    // There should only be one because it's unique.
+    const user = users[0];
+    if (!user) {
+      throw new Error('User does not exist');
+    }
+
+    const valid: boolean = await bcrypt.compare(inputData.password, user.password);
+    if (!valid) {
+      throw new Error('Incorrect password');
+    }
+
+    const token: string = jwt.sign({
+        id: user.id,
+        username: user.username,
+      }, ctx.APP_SECRET,
+      {
+        expiresIn: '1d'
+      });
+
+    return token;
   }
 }

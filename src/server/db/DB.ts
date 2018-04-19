@@ -5,6 +5,10 @@ import {Connection, createConnection} from 'typeorm';
  */
 export default class DB {
 
+  public static readonly COMPLIANCE = {
+    BCRYPT_SALT_ROUNDS: 12,
+  };
+
   // Static Methods & Fields
   public static getInstance() {
     if (DB.instance) {

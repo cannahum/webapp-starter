@@ -10,6 +10,10 @@ import schemaBuilder from './graphql/schema';
 const basePath: string = path.resolve(__dirname, '../../');
 const indexHtml: string = path.resolve(basePath, 'dist/index.html');
 
+export interface AppContext {
+  APP_SECRET: string;
+}
+
 class App {
   public express: express.Application;
   private db: DB;
@@ -31,27 +35,18 @@ class App {
       this.express.use('/', router);
       this.express.use('/dist', express.static('dist'));
       this.express.use('/assets', express.static('assets'));
-      this.express.use('/graphql', ExpressGraphQL({
+      this.express.use('/graphql', bodyParser.json(), ExpressGraphQL({
         schema,
         graphiql: true,
+        context: {
+          APP_SECRET: process.env.APP_SECRET,
+        } as AppContext,
       }));
     }
     catch (e) {
       console.log(Chalk.red('Could not build graphql schema'));
       console.log(Chalk.red(e));
       process.exit(1);
-    }
-  }
-
-  private async getDBConnection() {
-    console.log('app:getDBConnection');
-    try {
-      const conn = await this.db.getConnection();
-      console.log('app:getDBConnection:success');
-    }
-    catch (e) {
-      console.log('app:getDBConnection:erraor');
-      console.log(e);
     }
   }
 }
