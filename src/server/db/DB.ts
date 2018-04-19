@@ -1,5 +1,4 @@
 import {Connection, createConnection} from 'typeorm';
-import {default as CONNECTION_OPTIONS_DEV} from './ormconfig.dev';
 
 /**
  *
@@ -30,7 +29,7 @@ export default class DB {
 
   // Throws errors
   private async createConnection(): Promise<Connection> {
-    this.connection = await createConnection(CONNECTION_OPTIONS_DEV);
+    this.connection = await createConnection();
     return this.connection;
   }
 }
