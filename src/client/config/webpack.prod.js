@@ -4,7 +4,7 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 const plugins = (baseConfig.plugins || []).concat([
   new HtmlWebpackPlugin({
-    template: 'assets/index.html',
+    template: 'templates/index.html',
     alwaysWriteToDisk: true
   }),
   new BundleAnalyzerPlugin({
