@@ -1,5 +1,5 @@
 import {Repository, Connection} from 'typeorm';
-import {Resolver, Query, Mutation, Arg, Ctx} from 'type-graphql';
+import {Resolver, Query, Mutation, Arg, Ctx, Authorized} from 'type-graphql';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -9,10 +9,15 @@ import {AccountType, AuthLevel, Person} from '../../models/Person';
 import {NewPersonInputData} from './args/NewPersonInputData';
 import {LoginInputData} from './args/LoginInputData';
 
+export interface DecryptablePerson {
+  id: number;
+  username: string;
+}
 
 @Resolver()
 class PersonResolver {
 
+  @Authorized(String(AuthLevel.ADMIN))
   @Query((returns) => [Person])
   public async users(): Promise<Person[]> {
     const db = DB.getInstance();
@@ -50,7 +55,7 @@ class PersonResolver {
 
   @Mutation((returns) => String)
   public async login(@Arg('loginInput') inputData: LoginInputData,
-                     @Ctx() ctx: AppContext,): Promise<string> {
+                     @Ctx() ctx: AppContext): Promise<string> {
     // Find the user...
     let conn: Connection;
     try {
@@ -79,7 +84,7 @@ class PersonResolver {
     const token: string = jwt.sign({
         id: user.id,
         username: user.username,
-      }, ctx.APP_SECRET,
+      } as DecryptablePerson, ctx.APP_SECRET,
       {
         expiresIn: '1d'
       });
