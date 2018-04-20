@@ -39,7 +39,7 @@ class PersonResolver {
     const {user: {id}} = ctx;
     const conn: Connection = await db.getConnection();
     const repo: Repository<Person> = conn.getRepository(Person);
-    const person: Person | undefined = await repo.findOneById(id);
+    const person: Person | undefined = await repo.findOne(id);
     if (person) {
       return person;
     }

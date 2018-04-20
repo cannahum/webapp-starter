@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import app from './server/App';
+import app from './App';
 import chalk from 'chalk';
 
 const port: number = Number(process.env.PORT) || 3000;

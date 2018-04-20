@@ -78,7 +78,7 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "start:dev": "ts-node bin/dev",
+    "start:dev": "ts-node src/server/bin/dev",
     "test": "export NODE_ENV=test && jest",
     "build": "webpack --config config/webpack.dev.js",
     "build:watch": "webpack-dev-server --config config/webpack.dev-server.js",

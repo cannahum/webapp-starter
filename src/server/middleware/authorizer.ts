@@ -22,7 +22,7 @@ export const authorizer: AuthChecker<AppContext> = async ({root, args, context, 
   // Otherwise, check the db value
   const conn: Connection = await db.getConnection();
   const repo: Repository<Person> = conn.getRepository(Person);
-  const person: Person | undefined = await repo.findOneById(user.id);
+  const person: Person | undefined = await repo.findOne(user.id);
   if (!person) {
     return false;
   }
