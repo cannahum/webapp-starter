@@ -1,0 +1,1 @@
+require('dotenv').config({path: './ormconfig.test.env'})

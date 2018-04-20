@@ -34,6 +34,7 @@
     "typescript": "^2.8.3"
   },
   "scripts": {
+    "start": "ts-node bin/prod",
     "start:dev": "ts-node bin/dev"
   }
 }

@@ -7,7 +7,7 @@
   "author": "cannahum@outlook.com",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "npm start --prefix src/server",
     "start:dev": "npm run --prefix src/server start:dev",
     "test": "export NODE_ENV=test && jest",
     "build": "npm run --prefix src/client build",
