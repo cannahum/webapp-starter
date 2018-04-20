@@ -3,11 +3,13 @@ import {Resolver, Query, Mutation, Arg, Ctx, Authorized} from 'type-graphql';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import {AppContext} from "../../App";
+import {AppContext, AuthorizedAppContext} from "../../App";
 import DB from '../../db/DB';
 import {AccountType, AuthLevel, Person} from '../../models/Person';
 import {NewPersonInputData} from './args/NewPersonInputData';
 import {LoginInputData} from './args/LoginInputData';
+
+const db = DB.getInstance();
 
 export interface DecryptablePerson {
   id: number;
@@ -31,6 +33,19 @@ class PersonResolver {
     }
   }
 
+  @Authorized()
+  @Query((returns) => Person)
+  public async me(@Ctx() ctx: AuthorizedAppContext): Promise<Person> {
+    const {user: {id}} = ctx;
+    const conn: Connection = await db.getConnection();
+    const repo: Repository<Person> = conn.getRepository(Person);
+    const person: Person | undefined = await repo.findOneById(id);
+    if (person) {
+      return person;
+    }
+    throw new Error('How come this person does not exist?!');
+  }
+
   @Mutation((returns) => Person)
   public async signup(@Arg('newPersonInput') inputData: NewPersonInputData): Promise<Person> {
     const {username, emailAddress, password, profilePictureLink} = inputData;
@@ -42,7 +57,6 @@ class PersonResolver {
     p.profilePictureLink = profilePictureLink;
     p.authLevel = AuthLevel.REGULAR;
 
-    const db = DB.getInstance();
     try {
       const conn: Connection = await db.getConnection();
       const repo: Repository<Person> = conn.getRepository(Person);
@@ -59,7 +73,6 @@ class PersonResolver {
     // Find the user...
     let conn: Connection;
     try {
-      const db = DB.getInstance();
       conn = await db.getConnection();
     }
     catch (e) {

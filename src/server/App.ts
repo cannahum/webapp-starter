@@ -18,6 +18,10 @@ export interface AppContext {
   user?: DecryptablePerson;
 }
 
+export interface AuthorizedAppContext extends AppContext {
+  user: DecryptablePerson;
+}
+
 class App {
   public express: express.Application;
   private db: DB;
