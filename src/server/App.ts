@@ -11,7 +11,9 @@ import {DecryptablePerson} from "./graphql/resolvers/Person";
 
 const APP_SECRET = process.env.APP_SECRET || '';
 const basePath: string = path.resolve(__dirname, '../../');
-const indexHtml: string = path.resolve(basePath, 'dist/index.html');
+const assetsPath: string = path.resolve(basePath, 'client/assets/');
+const distPath: string = path.resolve(basePath, 'dist');
+const indexHtml: string = path.resolve(distPath, 'index.html');
 
 export interface AppContext {
   APP_SECRET: string;
@@ -43,8 +45,8 @@ class App {
     try {
       const schema: GraphQLSchema = await schemaBuilder();
       exp.use('/', router);
-      exp.use('/dist', express.static('dist'));
-      exp.use('/assets', express.static('assets'));
+      exp.use('/dist', express.static(distPath));
+      exp.use('/assets', express.static(assetsPath));
       exp.use('/graphql', bodyParser.json(), ExpressGraphQL((req: Request) => ({
         schema,
         graphiql: true,
