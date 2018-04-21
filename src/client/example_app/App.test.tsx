@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import AsyncComp from './components/AsyncComp';
 import {Provider} from 'react-redux';
 import App from './App';
-import {store} from './redux/index';
+import {store} from './redux/';
 
 configure({ adapter: new Adapter() });
 

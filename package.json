@@ -10,7 +10,7 @@
     "setup": "npm install --prefix src/server && npm install --prefix src/client",
     "start": "npm start --prefix src/server",
     "start:dev": "npm run --prefix src/server start:dev",
-    "test": "export NODE_ENV=test && jest",
+    "test": "npm test --prefix src/client",
     "build": "npm run --prefix src/client build",
     "build:watch": "npm run --prefix src/client build:watch",
     "build:prod": "npm run --prefix src/client build:prod"
