@@ -63,7 +63,7 @@ export class Person {
   @Column()
   public authLevel: AuthLevel;
 
-  @Field()
+  @Field((type) => [Post])
   @OneToMany((type) => Post, (post) => post.user)
   public posts: Promise<Post[]>;
 }

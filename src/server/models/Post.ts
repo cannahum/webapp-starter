@@ -27,6 +27,7 @@ export class Post {
   @Field((type) => Person)
   @ManyToOne((type) => Person, (user) => user.posts, {
     nullable: false,
+    eager: true,
   })
   @JoinColumn()
   public user: Person;
