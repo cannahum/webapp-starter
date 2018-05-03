@@ -1,5 +1,6 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {ID, Field, ObjectType, registerEnumType} from 'type-graphql';
+import {Post} from './Post';
 
 export enum AccountType {
   EMAIL,
@@ -61,4 +62,8 @@ export class Person {
   @Field((type) => AuthLevel)
   @Column()
   public authLevel: AuthLevel;
+
+  @Field()
+  @OneToMany((type) => Post, (post) => post.user)
+  public posts: Promise<Post[]>;
 }
