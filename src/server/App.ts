@@ -7,7 +7,7 @@ import Chalk from 'chalk';
 import DB from './db/DB';
 import schemaBuilder from './graphql/schema';
 import personMiddleWare from './middleware/person';
-import {DecryptablePerson} from "./graphql/resolvers/Person";
+import {IDecryptablePerson} from './graphql/resolvers/Person';
 
 const APP_SECRET = process.env.APP_SECRET || '';
 const basePath: string = path.resolve(__dirname, '../../');
@@ -15,13 +15,13 @@ const assetsPath: string = path.resolve(basePath, 'client/assets/');
 const distPath: string = path.resolve(basePath, 'dist');
 const indexHtml: string = path.resolve(distPath, 'index.html');
 
-export interface AppContext {
+export interface IAppContext {
   APP_SECRET: string;
-  user?: DecryptablePerson;
+  user?: IDecryptablePerson;
 }
 
-export interface AuthorizedAppContext extends AppContext {
-  user: DecryptablePerson;
+export interface IAuthorizedAppContext extends IAppContext {
+  user: IDecryptablePerson;
 }
 
 class App {
@@ -36,7 +36,7 @@ class App {
 
   private async mountRoutes(): Promise<void> {
     const router = express.Router();
-    let exp = this.express;
+    const exp = this.express;
     exp.use(bodyParser.json());
     exp.use(personMiddleWare(APP_SECRET));
     router.get('/', (req: Request, res: Response) => {
@@ -53,7 +53,7 @@ class App {
         context: {
           user: (req as any).user,
           APP_SECRET,
-        } as AppContext,
+        } as IAppContext,
       })));
     }
     catch (e) {

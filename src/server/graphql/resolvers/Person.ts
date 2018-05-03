@@ -3,7 +3,7 @@ import {Resolver, Query, Mutation, Arg, Ctx, Authorized} from 'type-graphql';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import {AppContext, AuthorizedAppContext} from "../../App";
+import {IAppContext, IAuthorizedAppContext} from '../../App';
 import DB from '../../db/DB';
 import {AccountType, AuthLevel, Person} from '../../models/Person';
 import {NewPersonInputData} from './args/NewPersonInputData';
@@ -11,7 +11,7 @@ import {LoginInputData} from './args/LoginInputData';
 
 const db = DB.getInstance();
 
-export interface DecryptablePerson {
+export interface IDecryptablePerson {
   id: number;
   username: string;
 }
@@ -22,7 +22,6 @@ class PersonResolver {
   @Authorized(String(AuthLevel.ADMIN))
   @Query((returns) => [Person])
   public async users(): Promise<Person[]> {
-    const db = DB.getInstance();
     const conn: Connection = await db.getConnection();
     const repo: Repository<Person> = conn.getRepository(Person);
     try {
@@ -35,7 +34,7 @@ class PersonResolver {
 
   @Authorized()
   @Query((returns) => Person)
-  public async me(@Ctx() ctx: AuthorizedAppContext): Promise<Person> {
+  public async me(@Ctx() ctx: IAuthorizedAppContext): Promise<Person> {
     const {user: {id}} = ctx;
     const conn: Connection = await db.getConnection();
     const repo: Repository<Person> = conn.getRepository(Person);
@@ -69,7 +68,7 @@ class PersonResolver {
 
   @Mutation((returns) => String)
   public async login(@Arg('loginInput') inputData: LoginInputData,
-                     @Ctx() ctx: AppContext): Promise<string> {
+                     @Ctx() ctx: IAppContext): Promise<string> {
     // Find the user...
     let conn: Connection;
     try {
@@ -79,7 +78,7 @@ class PersonResolver {
       throw new Error(e);
     }
     const repo: Repository<Person> = conn.getRepository(Person);
-    let users: Person[] = await repo.find({
+    const users: Person[] = await repo.find({
       emailAddress: inputData.emailAddress,
     });
 
@@ -97,9 +96,9 @@ class PersonResolver {
     const token: string = jwt.sign({
         id: user.id,
         username: user.username,
-      } as DecryptablePerson, ctx.APP_SECRET,
+      } as IDecryptablePerson, ctx.APP_SECRET,
       {
-        expiresIn: '1d'
+        expiresIn: '1d',
       });
 
     return token;
