@@ -1,0 +1,2 @@
+require('dotenv').config({path: './ormconfig.dev.env'})
+require('../index');

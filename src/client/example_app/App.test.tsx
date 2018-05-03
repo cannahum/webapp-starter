@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import AsyncComp from './components/AsyncComp';
 import {Provider} from 'react-redux';
 import App from './App';
-import {store} from './redux/index';
+import {store} from './redux/';
 
 configure({ adapter: new Adapter() });
 
@@ -15,12 +15,12 @@ describe('<App/> tests', () => {
     const app = TestUtils.renderIntoDocument(
       <Provider store={store}><App/></Provider>,
     ) as React.Component<any, any>;
-    const appNode: Node = ReactDOM.findDOMNode(app);
+    const appNode: Node | null = ReactDOM.findDOMNode(app);
     expect(appNode).toBeDefined();
   });
 
   test('<App/> has <AsyncComp/> inside', () => {
     const wrapper: ShallowWrapper<App> = shallow(<App/>);
-    expect(wrapper.find(AsyncComp)).toHaveLength(1);
+    expect(wrapper.find(AsyncComp).length).toBe(1);
   });
 });

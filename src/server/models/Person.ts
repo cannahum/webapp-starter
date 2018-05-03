@@ -45,6 +45,7 @@ export class Person {
   @Field()
   @Column({
     nullable: false,
+    unique: true,
   })
   public username: string;
 

@@ -16,7 +16,7 @@ export default class App extends React.Component<{}, {}> {
           <div>
             <Counter/>
           </div>
-          <Link>Hover over me</Link>
+          <Link>Hover over me for some action</Link>
         </div>
       </Provider>
     );

@@ -23,7 +23,7 @@ export default class App extends React.Component<any, IAppState> {
   public render() {
     const {components} = this.state;
     if (isNull(components)) {
-      return <h2>Loading...</h2>;
+      return <h2>Loading... Please wait</h2>;
     }
     return (
       <div>

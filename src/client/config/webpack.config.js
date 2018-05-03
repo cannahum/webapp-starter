@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: "./src/client/index.js",
+  entry: "./index.js",
 
   output: {
     chunkFilename: '[name].bundle.js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../../../dist'),
     publicPath: 'dist',
   },
   optimization: {

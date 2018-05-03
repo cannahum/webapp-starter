@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const plugins = (baseConfig.plugins || []).concat([
   new HtmlWebpackPlugin({
-    template: 'assets/index.dev.html',
+    template: 'templates/index.dev.html',
     alwaysWriteToDisk: true
   }),
   new HtmlWebpackHarddiskPlugin(),

@@ -1,0 +1,40 @@
+{
+  "name": "webapp-starter-server",
+  "version": "1.0.0",
+  "description": "App server source code for the webapp-starter",
+  "main": "index.ts",
+  "author": "Can Nahum <Can_Nahum@intuit.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "chalk": "^2.4.0",
+    "class-validator": "^0.8.5",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "jsonwebtoken": "^8.2.1",
+    "pg": "^7.4.1",
+    "ts-node": "^6.0.0",
+    "type-graphql": "^0.10.0",
+    "typeorm": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^1.0.0",
+    "@types/body-parser": "^1.16.8",
+    "@types/chai": "^4.1.2",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.11.1",
+    "@types/express-graphql": "^0.6.1",
+    "@types/jsonwebtoken": "^7.2.6",
+    "@types/node": "^9.6.6",
+    "@types/pg": "^7.4.6",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
+  },
+  "scripts": {
+    "start": "ts-node bin/prod",
+    "start:dev": "ts-node bin/dev"
+  }
+}
