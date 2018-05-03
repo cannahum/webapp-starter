@@ -27,7 +27,6 @@ export class Post {
   @Field((type) => Person)
   @ManyToOne((type) => Person, (user) => user.posts, {
     nullable: false,
-    cascadeRemove: true,
   })
   @JoinColumn()
   public user: Person;
