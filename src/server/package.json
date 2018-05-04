@@ -34,7 +34,7 @@
     "typescript": "^2.8.3"
   },
   "scripts": {
-    "start": "ts-node bin/prod",
-    "start:dev": "ts-node bin/dev"
+    "start": "tsc && node bin/prod",
+    "start:dev": "tsc -p \"tsconfig.dev.json\" && node bin/dev"
   }
 }

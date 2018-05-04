@@ -1,4 +1,5 @@
+// Run this with node 9.
 // in Production mode, all environment variables should be
 // entered manually. This will just run the server code.
 // No dotenv here.
-require('../index');
+require('../dist/index');

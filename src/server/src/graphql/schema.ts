@@ -1,13 +1,12 @@
 import {AuthChecker, buildSchema} from 'type-graphql';
 import {GraphQLSchema} from 'graphql';
-import {resolve} from 'path';
-import {authorizer} from "../middleware/authorizer";
-
-const resolverPath: string = resolve(__dirname, './resolvers') + '/**/*.ts';
+import {authorizer} from '../middleware/authorizer';
+import {resolvers} from './resolvers/';
 
 export default function(): Promise<GraphQLSchema> {
+  console.log('Building Schema');
   return buildSchema({
-    resolvers: [resolverPath],
+    resolvers: Object.values(resolvers),
     authChecker: authorizer as AuthChecker,
   });
 }
