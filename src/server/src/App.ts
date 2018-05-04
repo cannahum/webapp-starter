@@ -49,7 +49,7 @@ class App {
       exp.use('/assets', express.static(assetsPath));
       exp.use('/graphql', bodyParser.json(), ExpressGraphQL((req: Request) => ({
         schema,
-        graphiql: process.env.NODE_ENV === 'dev' || true,
+        graphiql: process.env.NODE_ENV === 'dev',
         context: {
           user: (req as any).user,
           APP_SECRET,
