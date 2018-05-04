@@ -1,2 +1,3 @@
+// Run this with ts-node.
 require('dotenv').config({path: './ormconfig.dev.env'})
-require('../index');
+require('../dist/index');

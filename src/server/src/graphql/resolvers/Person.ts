@@ -17,7 +17,7 @@ export interface IDecryptablePerson {
 }
 
 @Resolver()
-class PersonResolver {
+export default class PersonResolver {
 
   @Authorized(String(AuthLevel.ADMIN))
   @Query((returns) => [Person])

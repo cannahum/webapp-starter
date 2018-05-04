@@ -8,7 +8,7 @@ import {IAppContext, IAuthorizedAppContext} from '../../App';
 const db = DB.getInstance();
 
 @Resolver()
-class PostResolver {
+export default class PostResolver {
 
   @Authorized(String(AuthLevel.REGULAR))
   @Query((returns) => [Post])
