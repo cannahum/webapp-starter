@@ -4,7 +4,6 @@ import {authorizer} from '../middleware/authorizer';
 import {resolvers} from './resolvers/';
 
 export default function(): Promise<GraphQLSchema> {
-  console.log('Building Schema');
   return buildSchema({
     resolvers: Object.values(resolvers),
     authChecker: authorizer as AuthChecker,

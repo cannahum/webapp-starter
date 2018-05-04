@@ -30,11 +30,15 @@
     "@types/jsonwebtoken": "^7.2.6",
     "@types/node": "^9.6.6",
     "@types/pg": "^7.4.6",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.2",
     "tslint": "^5.9.1",
     "typescript": "^2.8.3"
   },
   "scripts": {
     "start": "tsc && node bin/prod",
-    "start:dev": "tsc -p \"tsconfig.dev.json\" && node bin/dev"
+    "start:dev": "tsc --inlineSources --sourceMap && node bin/dev",
+    "start:watch": "gulp watch-typescript"
   }
 }
