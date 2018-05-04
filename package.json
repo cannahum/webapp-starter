@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "setup": "npm install --prefix src/server && npm install --prefix src/client",
+    "setup:clean": "rm -rf src/server/node_modules && rm -rf src/client/node_modules && npm run setup",
     "start": "npm start --prefix src/server",
     "start:dev": "npm run --prefix src/server start:dev",
     "test": "npm test --prefix src/client",
