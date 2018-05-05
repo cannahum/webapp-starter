@@ -1,0 +1,22 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-console": false,
+    "quotemark": [true, "single", "jsx-double"],
+    "ordered-imports": [false],
+    "no-namespace": [false],
+    "object-literal-sort-keys": false,
+    "one-line": [false],
+    "no-reference": false,
+    "no-unused-variable": [
+      true
+    ],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "whitespace": [true, "check-module"]
+  },
+  "rulesDirectory": []
+}

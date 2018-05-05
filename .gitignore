@@ -59,10 +59,14 @@ typings/
 
 # IntelliJ
 *.iml
+*.iws
+workspace.xml
+tasks.xml
 
-dist/
 __snapshots__/
+dist
 app/client/etc/
 app/server/etc/
+app/client/dist/
+app/server/dist/
 app/server/src/db/migrations/
-app/tslint.json
