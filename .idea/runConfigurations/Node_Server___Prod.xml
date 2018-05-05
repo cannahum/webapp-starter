@@ -12,7 +12,7 @@
       <env name="TYPEORM_MIGRATIONS" value="dist/db/migrations/**/*.js" />
     </envs>
     <method>
-      <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/src/server/tsconfig.dev.json" />
+      <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/app/server/tsconfig.json" />
     </method>
   </configuration>
 </component>
