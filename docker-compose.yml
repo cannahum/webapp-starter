@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web-server:
+    build:
+      context: ./src/server
+    volumes:
+      - ./src/server/src:/usr/app/server
+#      - ./dist:/usr/app
+    ports:
+      - 5001:3000
+    environment:
+      - NODE_ENV=dev
+      - APP_SECRET=lksjdlkwoeo2032j30923nb8iuq8a88823LJKN
+      - TYPEORM_CONNECTION=postgres
+      - TYPEORM_URL=postgres://postgres:postgres@typeorm-db:5432/webapp_starter_dev
+      - TYPEORM_DATABASE=webapp_starter_dev
+      - TYPEORM_SYNCHRONIZE=true
+      - TYPEORM_LOGGING=true
+      - TYPEORM_ENTITIES=dist/models/**/*.js
+      - TYPEORM_MIGRATIONS=dist/db/migrations/**/*.js
+
+  typeorm-db:
+    image: postgres
+    restart: always

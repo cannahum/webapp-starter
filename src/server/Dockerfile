@@ -1,19 +1,21 @@
 FROM node:9.11.1-onbuild
 
 # Create app directory
-WORKDIR /usr/src/app
+RUN mkdir /usr/app
+RUN mkdir /usr/app/server
+
+WORKDIR /usr/app/server
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+COPY ./package.json /usr/app/server
+COPY ./package-lock.json /usr/app/server
+
 
 RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
 # Bundle app source
-COPY . .
+COPY . /usr/app/server
 
-EXPOSE 8080
 CMD [ "npm", "run", "start:dev" ]
