@@ -6,8 +6,8 @@
   "author": "cannahum@outlook.com",
   "license": "MIT",
   "scripts": {
-    "setup": "npm install --prefix app/server && npm install --prefix app/client",
-    "setup:clean": "rm -rf app/server/node_modules && rm -rf app/client/node_modules && npm run setup",
+    "setup": "npm install && npm install --prefix app/server && npm install --prefix app/client",
+    "setup:clean": "npm install && npm run --prefix app/server setup:clean && npm run --prefix app/client setup:clean",
     "start": "npm start --prefix app/server",
     "server:watch": "npm run --prefix app/server server:watch",
     "start:dev": "npm run --prefix app/server start:dev",
@@ -15,5 +15,9 @@
     "build:client:dev": "npm run --prefix app/client build:dev",
     "build:client:watch": "npm run --prefix app/client build:watch",
     "build:client:prod": "npm run --prefix app/client build:prod"
+  },
+  "devDependencies": {
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
   }
 }
