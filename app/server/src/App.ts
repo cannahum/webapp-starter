@@ -11,8 +11,9 @@ import {IDecryptablePerson} from './graphql/resolvers/Person';
 
 const APP_SECRET = process.env.APP_SECRET || '';
 const basePath: string = path.resolve(__dirname, '../../');
-const assetsPath: string = path.resolve(basePath, 'client/assets/');
-const distPath: string = path.resolve(basePath, 'dist');
+const clientPath: string = path.resolve(basePath, 'client');
+const assetsPath: string = path.resolve(clientPath, 'assets');
+const distPath: string = path.resolve(clientPath, 'dist');
 const indexHtml: string = path.resolve(distPath, 'index.html');
 
 export interface IAppContext {

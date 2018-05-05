@@ -39,6 +39,6 @@
   "scripts": {
     "start": "tsc && node bin/prod",
     "start:dev": "tsc --inlineSources --sourceMap && node bin/dev",
-    "start:watch": "gulp watch-typescript"
+    "server:watch": "gulp watch-typescript"
   }
 }
