@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {increment, decrement} from '../redux/actions/counter';
+import { connect } from 'react-redux';
+import { increment, decrement } from '../redux/actions/counter';
 
 function mapStateToProps(state) {
   return {

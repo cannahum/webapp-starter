@@ -1,9 +1,9 @@
-import {Resolver, Query, Mutation, Args, Arg, Ctx, Authorized} from 'type-graphql';
-import {Repository, Connection} from 'typeorm';
+import { Resolver, Query, Mutation, Args, Arg, Ctx, Authorized } from 'type-graphql';
+import { Repository, Connection } from 'typeorm';
 import DB from '../../db/DB';
-import {Post, VoteType} from '../../models/Post';
-import {AuthLevel, Person} from '../../models/Person';
-import {IAppContext, IAuthorizedAppContext} from '../../App';
+import { Post, VoteType } from '../../models/Post';
+import { AuthLevel, Person } from '../../models/Person';
+import { IAppContext, IAuthorizedAppContext } from '../../App';
 
 const db = DB.getInstance();
 
@@ -42,11 +42,9 @@ export default class PostResolver {
 
   @Authorized()
   @Mutation((returns) => Post)
-  public async createPost(
-    @Arg('caption', {nullable: false}) caption: string,
-    @Arg('voteType', {nullable: false}) voteType: VoteType,
-    @Ctx() ctx: IAuthorizedAppContext,
-  ): Promise<Post> {
+  public async createPost(@Arg('caption', {nullable: false}) caption: string,
+                          @Arg('voteType', {nullable: false}) voteType: VoteType,
+                          @Ctx() ctx: IAuthorizedAppContext,): Promise<Post> {
     const {user} = ctx;
     // Find the person object;
     const conn: Connection = await db.getConnection();

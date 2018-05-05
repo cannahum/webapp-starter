@@ -67,6 +67,3 @@ app/client/etc/
 app/server/etc/
 app/server/src/db/migrations/
 app/tslint.json
-
-.DS_Store
-package-lock.json

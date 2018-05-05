@@ -1,13 +1,13 @@
-import {Repository, Connection} from 'typeorm';
-import {Resolver, Query, Mutation, Arg, Ctx, Authorized} from 'type-graphql';
+import { Repository, Connection } from 'typeorm';
+import { Resolver, Query, Mutation, Arg, Ctx, Authorized } from 'type-graphql';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import {IAppContext, IAuthorizedAppContext} from '../../App';
+import { IAppContext, IAuthorizedAppContext } from '../../App';
 import DB from '../../db/DB';
-import {AccountType, AuthLevel, Person} from '../../models/Person';
-import {NewPersonInputData} from './args/NewPersonInputData';
-import {LoginInputData} from './args/LoginInputData';
+import { AccountType, AuthLevel, Person } from '../../models/Person';
+import { NewPersonInputData } from './args/NewPersonInputData';
+import { LoginInputData } from './args/LoginInputData';
 
 const db = DB.getInstance();
 
@@ -20,7 +20,7 @@ export interface IDecryptablePerson {
 export default class PersonResolver {
 
   @Authorized(String(AuthLevel.ADMIN))
-  @Query((returns) => [Person])
+  @Query((_returns) => [Person])
   public async users(): Promise<Person[]> {
     const conn: Connection = await db.getConnection();
     const repo: Repository<Person> = conn.getRepository(Person);
@@ -33,7 +33,7 @@ export default class PersonResolver {
   }
 
   @Authorized()
-  @Query((returns) => Person)
+  @Query((_returns) => Person)
   public async me(@Ctx() ctx: IAuthorizedAppContext): Promise<Person> {
     const {user: {id}} = ctx;
     const conn: Connection = await db.getConnection();
@@ -45,7 +45,7 @@ export default class PersonResolver {
     throw new Error('How come this person does not exist?!');
   }
 
-  @Mutation((returns) => Person)
+  @Mutation((_returns) => Person)
   public async signup(@Arg('newPersonInput') inputData: NewPersonInputData): Promise<Person> {
     const {username, emailAddress, password, profilePictureLink} = inputData;
     const p = new Person();
@@ -66,7 +66,7 @@ export default class PersonResolver {
     }
   }
 
-  @Mutation((returns) => String)
+  @Mutation((_returns) => String)
   public async login(@Arg('loginInput') inputData: LoginInputData,
                      @Ctx() ctx: IAppContext): Promise<string> {
     // Find the user...
@@ -93,14 +93,12 @@ export default class PersonResolver {
       throw new Error('Incorrect password');
     }
 
-    const token: string = jwt.sign({
-        id: user.id,
-        username: user.username,
-      } as IDecryptablePerson, ctx.APP_SECRET,
+    return jwt.sign(
+      {id: user.id, username: user.username} as IDecryptablePerson,
+      ctx.APP_SECRET,
       {
         expiresIn: '1d',
-      });
-
-    return token;
+      },
+    );
   }
 }

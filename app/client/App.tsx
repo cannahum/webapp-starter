@@ -1,5 +1,5 @@
 import React from 'react';
-import {isNull} from 'util';
+import { isNull } from 'util';
 
 interface IAppState {
   dynamicComponentsHaveLoaded: boolean;

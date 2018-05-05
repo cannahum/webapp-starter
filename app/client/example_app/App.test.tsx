@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
-import {configure, shallow, ShallowWrapper} from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import AsyncComp from './components/AsyncComp';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import App from './App';
-import {store} from './redux/';
+import { store } from './redux/';
 
-configure({ adapter: new Adapter() });
+configure({adapter: new Adapter()});
 
 describe('<App/> tests', () => {
   test('The component gets rendered', () => {

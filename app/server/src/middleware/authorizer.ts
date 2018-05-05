@@ -1,8 +1,8 @@
-import {AuthChecker} from 'type-graphql';
-import {IAppContext} from '../App';
+import { AuthChecker } from 'type-graphql';
+import { IAppContext } from '../App';
 import DB from '../db/DB';
-import {AuthLevel, Person} from '../models/Person';
-import {Connection, Repository} from 'typeorm';
+import { AuthLevel, Person } from '../models/Person';
+import { Connection, Repository } from 'typeorm';
 
 const db = DB.getInstance();
 

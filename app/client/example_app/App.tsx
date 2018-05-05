@@ -1,9 +1,9 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import AsyncComp from './components/AsyncComp';
 import Counter from './components/CounterConnected';
 import Link from './components/Link';
-import {store} from './redux';
+import { store } from './redux';
 import './example.scss';
 
 export default class App extends React.Component<{}, {}> {

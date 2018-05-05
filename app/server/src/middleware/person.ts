@@ -1,10 +1,9 @@
-import {NextFunction, Request, Response} from 'express';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import chalk from 'chalk';
-import {IDecryptablePerson} from '../graphql/resolvers/Person';
+import { IDecryptablePerson } from '../graphql/resolvers/Person';
 
-export default function addThePersonMiddleWare(SECRET: string):
-  (r1: Request, r2: Response, next: NextFunction) => void {
+export default function addThePersonMiddleWare(SECRET: string): (r1: Request, r2: Response, next: NextFunction) => void {
   return (req: Request, res: Response, next: NextFunction): void => {
     const token: string | string[] | undefined = req.headers.authorization;
     if (typeof token !== 'string') {

@@ -1,13 +1,13 @@
 import * as bodyParser from 'body-parser';
-import express, {Request, Response} from 'express';
-import {GraphQLSchema} from 'graphql';
+import express, { Request, Response } from 'express';
+import { GraphQLSchema } from 'graphql';
 import ExpressGraphQL from 'express-graphql';
 import path from 'path';
 import Chalk from 'chalk';
 import DB from './db/DB';
 import schemaBuilder from './graphql/schema';
 import personMiddleWare from './middleware/person';
-import {IDecryptablePerson} from './graphql/resolvers/Person';
+import { IDecryptablePerson } from './graphql/resolvers/Person';
 
 const APP_SECRET = process.env.APP_SECRET || '';
 const basePath: string = path.resolve(__dirname, '../../');
@@ -32,7 +32,7 @@ class App {
   constructor() {
     this.express = express();
     this.db = DB.getInstance();
-    this.mountRoutes();
+    const promise: Promise<void> = this.mountRoutes();
   }
 
   private async mountRoutes(): Promise<void> {

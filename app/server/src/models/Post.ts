@@ -1,6 +1,6 @@
-import {Column, Entity, JoinColumn, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {Person} from './Person';
+import { Column, Entity, JoinColumn, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Person } from './Person';
 
 export enum VoteType {
   UP_DOWN,

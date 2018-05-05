@@ -1,5 +1,5 @@
-import {Reducer} from 'redux';
-import {CounterTypes, isCounterActionType} from '../actions/counter';
+import { Reducer } from 'redux';
+import { CounterTypes, isCounterActionType } from '../actions/counter';
 
 export interface ICounterReducer {
   counter: number;
@@ -25,4 +25,4 @@ const CounterReducer: Reducer<ICounterReducer> = (state = initialState(), action
   }
 };
 
-export {CounterReducer};
+export { CounterReducer };

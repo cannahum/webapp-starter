@@ -1,6 +1,6 @@
-import {createStore, combineReducers, Store, Reducer} from 'redux';
-import {CounterReducer as counter, ICounterReducer} from './reducers/counter';
-import {LinkReducer as link, ILinkReducer} from './reducers/link';
+import { createStore, combineReducers, Store, Reducer } from 'redux';
+import { CounterReducer as counter, ICounterReducer } from './reducers/counter';
+import { LinkReducer as link, ILinkReducer } from './reducers/link';
 
 export interface IReducers {
   counter: ICounterReducer;

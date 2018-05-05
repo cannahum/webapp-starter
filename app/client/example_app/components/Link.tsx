@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect, Dispatch, MapStateToPropsParam, MapStateToProps, MapDispatchToProps} from 'react-redux';
-import {IReducers} from '../redux';
-import {hover, unhover} from '../redux/actions/link';
-import {ILinkReducer} from '../redux/reducers/link';
+import { connect, Dispatch, MapStateToPropsParam, MapStateToProps, MapDispatchToProps } from 'react-redux';
+import { IReducers } from '../redux';
+import { hover, unhover } from '../redux/actions/link';
+import { ILinkReducer } from '../redux/reducers/link';
 
 const mapStateToProps: MapStateToProps<ILinkReducer, {}, IReducers> = (state: IReducers): ILinkReducer => {
   return {
@@ -44,4 +44,5 @@ class Link extends React.Component<ILinkProps> {
     );
   }
 }
+
 export default connect<ILinkReducer, IDispatchProps, {}, IReducers>(mapStateToProps, mapDispatchToProps)(Link);

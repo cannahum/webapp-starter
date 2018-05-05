@@ -1,5 +1,5 @@
-import {Reducer} from 'redux';
-import {LinkActionTypes, hover, unhover, isLinkActionType} from '../actions/link';
+import { Reducer } from 'redux';
+import { LinkActionTypes, hover, unhover, isLinkActionType } from '../actions/link';
 
 export interface ILinkReducer {
   hovered: boolean;
@@ -29,4 +29,4 @@ const LinkReducer: Reducer<ILinkReducer> = (state = initialState(), action: any)
   }
 };
 
-export {LinkReducer};
+export { LinkReducer };
