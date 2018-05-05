@@ -58,7 +58,6 @@ typings/
 .env
 
 # IntelliJ
-.idea
 *.iml
 
 dist/
