@@ -1,38 +1,72 @@
 # A Full Stack Node-React Web App Starter
 
-* Yarn
+* npm
 * TypeScript,
-* ts-node, 
+* JavaScript (yes, they can co-exist),
+* node,
+* Express,
+* TypeORM,
+* GraphQL (TypeGraphQL),
+* React,
+* Redux,
+* Jest, 
 * SCSS,
 * Webpack (with Dev Server)
 
+## Project Structure
+```
+/
+-- IDE folders
+-- tslint.json
+-- package.json
+-- app/
+-- -- client/
+-- -- -- package.json
+-- -- -- config/      <= webpack configurations
+-- -- -- example_app/  <= Example kitchen-sink app for may different uses
+-- -- -- templates/   <= HTML templates
+-- -- -- index.js     <= Entry Point
+-- -- -- index.scss   
+-- -- -- jest.config.js
+-- -- server/
+-- -- -- bin/         <= Server starters, based on mode (prod or dev
+-- -- -- package.json
+-- -- -- src/
+-- -- -- -- Read more below...
+```
+
+# Get Started - (like, immediately)
+
 ## Installation
 Clone or download the repo.
+```bash
+git clone https://github.com/cannahum/webapp-starter.git
+```
+
+**Recommended Version of Node: 8 or above, because there is package-lock.json**
+
+Run:
+```bash
+npm run setup:clean
+# Run this whenever you want to test your dependencies, as well
+```
+This call will remove the node_modules from the entire project, then re-install them.
 
 ## Usage
-There are three ways to start the project,
+Dev mode is easy to start, we need to start the server:
 
-### Building 
-```bash
-npm run build
+```bash 
+npm run start:dev
 ```
 
-This will build the client side in `development` mode, and create a directory called `dist`.
-You will see the index.html and bundle.js with all the react code in the said directory.
-
-
+In a new instance of terminal, build the front-end code.
 ```bash
-npm run build:watch
+npm run build:client:dev
 ```
-This will trigger the webpack-dev-server to run and watch all changes. Still, in `development` mode.
 
+Or if you'd like a process to watch the files while you develop and continuously build:
 ```bash
-npm run build:prod
+npm run build:client:watch
 ```
-This will do the same thing as the first command but it won't generate sourcemap files and it will minify the artifact.
 
-### Starting
-```bash
-npm start
-```
-This will start the ts-node (TypeScript node) without having to compile the server-side code.
+Then on your browser, navigate to http://localhost:3000
