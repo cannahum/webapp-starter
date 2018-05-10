@@ -70,3 +70,16 @@ npm run build:client:watch
 ```
 
 Then on your browser, navigate to http://localhost:3000
+
+## Advanced Usage (with Database)
+In order to use the full application, you need to connect the server to a database. 
+In the `{root}/app/server`, you will find a file called `ormconfig.dev.env`.
+This file has a set of environment variables that are used in the _development_ mode.
+As the TypeORM documentation suggests, you need to specify valid connection configurations
+to your database.
+
+Those variables are an example, and that's what works for my machine.
+Also, if you prefer not to use that file and input your own environment variables,
+you may edit the `{root}/app/server/bin/dev` so that it skips the ormconfig.dev.env.
+
+
