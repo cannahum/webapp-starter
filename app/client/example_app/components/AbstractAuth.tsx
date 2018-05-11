@@ -88,10 +88,10 @@ export default abstract class AbstractAuth extends React.Component<AbstractAuthP
     );
   }
 
-  protected getSubmitButton(): JSX.Element {
+  protected getSubmitButton(message: string): JSX.Element {
     return (
       <div className="auth-submit-button">
-        <input type="submit" value="Sign Up!"/>
+        <input type="submit" value={message}/>
       </div>
     );
   }

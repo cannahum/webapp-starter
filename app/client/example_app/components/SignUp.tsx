@@ -16,7 +16,7 @@ class SignUp extends AbstractAuth {
           {this.getUsernameInput()}
           {this.getPasswordInput()}
           {this.getPasswordVerificationInput()}
-          {this.getSubmitButton()}
+          {this.getSubmitButton('Sign Up')}
         </form>
       </div>
     );

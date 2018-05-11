@@ -14,7 +14,7 @@ class LogIn extends AbstractAuth {
         <form onSubmit={this.onSubmit}>
           {this.getEmailInput()}
           {this.getPasswordInput()}
-          {this.getSubmitButton()}
+          {this.getSubmitButton('Log In')}
         </form>
       </div>
     );
