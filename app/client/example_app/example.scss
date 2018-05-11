@@ -22,6 +22,10 @@ body {
       color: #333333;
     }
 
+    .navigate-to-auth {
+      cursor: pointer;
+    }
+
     .auth-wrapper {
       background-color: #cbcbcb;
       border: 2px dotted blue;
@@ -52,25 +56,21 @@ body {
         }
       }
 
-      $submit-button-color: green;
+      $submit-button-color: #4CAF50;
       .auth-submit-button {
-        cursor: pointer;
-        background-color: white;
-        color: $submit-button-color;
-        border: 1px dotted $submit-button-color;
-        border-radius: 4px;
-        margin: auto;
-        width: 100px;
-        text-align: center;
+        input[type=button], input[type=submit], input[type=reset] {
+          background-color: white;
+          border: none;
+          color: $submit-button-color;
+          padding: 16px 32px;
+          text-decoration: none;
+          margin: 4px 2px;
+          cursor: pointer;
 
-        span {
-          padding: 15px 0;
-          display: block;
-        }
-        &:hover {
-          background-color: $submit-button-color;
-          color: white;
-          border: 1px solid $submit-button-color;
+          &:hover {
+            background-color: $submit-button-color;
+            color: white;
+          }
         }
       }
     }

@@ -1,11 +1,11 @@
 import React from 'react';
-import AbstractAuth, { IStateProps, IOwnProps, IDispatchProps } from './AbstractAuth';
+import AbstractAuth, { IDispatchProps, IOwnProps, IStateProps } from './AbstractAuth';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
-import { doSignUp, updateField, AuthField } from '../redux/actions/auth';
+import { doLogIn, updateField } from '../redux/actions/auth';
 import { IApplicationState } from '../redux';
 
-class SignUp extends AbstractAuth {
+class LogIn extends AbstractAuth {
 
   public render() {
     return (
@@ -13,23 +13,21 @@ class SignUp extends AbstractAuth {
         <span className="auth-header">Sign up with email and password:</span>
         <form onSubmit={this.onSubmit}>
           {this.getEmailInput()}
-          {this.getUsernameInput()}
           {this.getPasswordInput()}
-          {this.getPasswordVerificationInput()}
           {this.getSubmitButton()}
         </form>
       </div>
     );
   }
 
-  protected submit(): void {
-    this.props.doSignUp();
+  protected submit() {
+    this.props.doLogin();
   }
 }
 
 // Redux connections
 const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IOwnProps> = (dispatch: Dispatch): IDispatchProps => ({
-  doSignUp: bindActionCreators(doSignUp, dispatch),
+  doSignUp: bindActionCreators(doLogIn, dispatch),
   updateField: bindActionCreators(updateField, dispatch),
 });
 const mapStateToProps: MapStateToProps<IStateProps, IOwnProps, IApplicationState> =
@@ -38,4 +36,4 @@ const mapStateToProps: MapStateToProps<IStateProps, IOwnProps, IApplicationState
       auth: state.auth,
     };
   };
-export default connect<IStateProps, IDispatchProps, {}, IApplicationState>(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect<IStateProps, IDispatchProps, {}, IApplicationState>(mapStateToProps, mapDispatchToProps)(LogIn);

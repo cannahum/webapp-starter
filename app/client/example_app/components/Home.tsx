@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, RouteComponentProps, Route } from 'react-router';
 import SignUp from './SignUp';
-import Login from './Login';
+import LogIn from './LogIn';
 
 interface IHomeProps {
 }
@@ -28,12 +28,16 @@ class Home extends React.Component<HomeProps> {
             Create a user, or login with an existing user. If you've configured the DB connection correctly,
             this should work. Then create posts.
           </p>
-          <div onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('signup')}>Go To Sign Up</div>
-          <div onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('login')}>Go To Log In</div>
+          <div className="navigate-to-auth" onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('signup')}>
+            Go To Sign Up
+          </div>
+          <div className="navigate-to-auth" onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('login')}>
+            Go To Log In
+          </div>
 
           <div>
             <Route path="/signup" component={SignUp}/>
-            <Route path="/signup" component={Login}/>
+            <Route path="/login" component={LogIn}/>
           </div>
         </div>
       </div>
