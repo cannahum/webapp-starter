@@ -1,6 +1,7 @@
-const baseConfig = require('./webpack.config');
+const webpack = require('webpack');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const baseConfig = require('./webpack.config');
 
 const plugins = (baseConfig.plugins || []).concat([
   new HtmlWebpackPlugin({
@@ -8,6 +9,9 @@ const plugins = (baseConfig.plugins || []).concat([
     alwaysWriteToDisk: true
   }),
   new HtmlWebpackHarddiskPlugin(),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('development')
+  })
 ]);
 
 module.exports = Object.assign({}, baseConfig, {
@@ -19,6 +23,7 @@ module.exports = Object.assign({}, baseConfig, {
     'react-dom': 'ReactDOM',
     'redux': 'Redux',
     'react-redux': 'ReactRedux',
-    'react-router': 'ReactRouter'
+    'react-router': 'ReactRouter',
+    'react-router-redux': 'ReactRouterRedux'
   }
 });

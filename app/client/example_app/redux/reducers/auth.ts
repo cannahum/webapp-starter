@@ -1,8 +1,8 @@
-import { Reducer } from 'redux';
+import { AnyAction, Reducer } from 'redux';
 import { AuthActionTypes, IAuthAction, AuthField } from '../actions/auth';
 import { isNull } from 'util';
 
-export interface IAuthReducer {
+export interface IAuthState {
   fields: {
     [index: string]: string;
   };
@@ -10,14 +10,14 @@ export interface IAuthReducer {
   isAuthenticated: boolean;
 }
 
-const initialState = (): IAuthReducer => ({
+const initialState = (): IAuthState => ({
   fields: {},
   AuthorizationToken: null,
   isAuthenticated: false,
 });
 
-export const authReducer: Reducer<IAuthReducer, IAuthAction> =
-  (state = initialState(), action: IAuthAction): IAuthReducer => {
+export const authReducer: Reducer<IAuthState> =
+  (state = initialState(), action: AnyAction): IAuthState => {
     const {type, payload} = action;
     switch (type) {
       case AuthActionTypes.UPDATE_FIELD: {

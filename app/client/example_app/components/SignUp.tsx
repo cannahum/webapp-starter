@@ -2,18 +2,21 @@ import React from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { doSignUp, updateField, AuthField, IAuthAction } from '../redux/actions/auth';
-import { IReducers } from '../redux/index';
+import { IApplicationState } from '../redux/index';
 
 interface IDispatchProps {
   doSignUp: typeof doSignUp;
   updateField: typeof updateField;
 }
+
 interface IOwnProps {
   [index: string]: any;
 }
+
 interface IStateProps {
   [index: string]: any;
 }
+
 type SignUpProps = IDispatchProps & IOwnProps & IStateProps;
 
 // Redux connections
@@ -21,9 +24,10 @@ const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IOwnProps> = (dispa
   doSignUp: bindActionCreators(doSignUp, dispatch),
   updateField: bindActionCreators(updateField, dispatch),
 });
-const mapStateToProps: MapStateToProps<IStateProps, IOwnProps, IReducers> = (state: IReducers): IStateProps => {
-  return {};
-};
+const mapStateToProps: MapStateToProps<IStateProps, IOwnProps, IApplicationState> =
+  (state: IApplicationState): IStateProps => {
+    return {};
+  };
 
 class SignUp extends React.Component<SignUpProps, {}> {
 
@@ -38,19 +42,24 @@ class SignUp extends React.Component<SignUpProps, {}> {
         <form onSubmit={this.onSubmit}>
           <div className="auth-input-wrapper">
             <label>Email:</label>
-            <input type="email" placeholder="example@domain.com" id="email-input" onChange={this.onFieldBlur}/>
+            <input type="email"
+                   autoComplete="email"
+                   placeholder="example@domain.com"
+                   id="email-input"
+                   onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Username:</label>
-            <input type="text" minLength={3} id="username-input" onChange={this.onFieldBlur}/>
+            <input type="text" autoComplete="on" minLength={3} id="username-input" onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Password:</label>
-            <input type="password" id="password-input" minLength={8} onChange={this.onFieldBlur}/>
+            <input type="password" autoComplete="on" id="password-input" minLength={8} onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Verify Password:</label>
-            <input type="password" id="password-verify-input" minLength={8} onChange={this.onFieldBlur}/>
+            <input type="password" autoComplete="on" id="password-verify-input" minLength={8}
+                   onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-submit-button">
             <span>Sign Up!</span>
@@ -87,4 +96,4 @@ class SignUp extends React.Component<SignUpProps, {}> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, IReducers>(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect<IStateProps, IDispatchProps, {}, IApplicationState>(mapStateToProps, mapDispatchToProps)(SignUp);
