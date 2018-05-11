@@ -5,12 +5,12 @@ import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import AsyncComp from './components/AsyncComp';
 import { Provider } from 'react-redux';
-import App from './App';
+import App from './Example';
 import { store } from './redux/';
 
 configure({adapter: new Adapter()});
 
-describe('<App/> tests', () => {
+describe('<Example/> tests', () => {
   test('The component gets rendered', () => {
     const app = TestUtils.renderIntoDocument(
       <Provider store={store}><App/></Provider>,
@@ -19,7 +19,7 @@ describe('<App/> tests', () => {
     expect(appNode).toBeDefined();
   });
 
-  test('<App/> has <AsyncComp/> inside', () => {
+  test('<Example/> has <AsyncComp/> inside', () => {
     const wrapper: ShallowWrapper<App> = shallow(<App/>);
     expect(wrapper.find(AsyncComp).length).toBe(1);
   });

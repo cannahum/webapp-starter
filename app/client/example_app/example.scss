@@ -1,10 +1,78 @@
+body {
+  background-color: wheat;
+}
+
 #example-app-wrapper {
-  .normal {
-    text-decoration: none;
-    color: black;
+
+  #example-app-header {
+    background-color: #333333;
+    color: wheat;
+    height: 60px;
+    h1 {
+      line-height: 60px;
+      margin: 0 10px;
+    }
   }
 
-  .hovered {
-    text-decoration: blue underline;
+  #example-app-content {
+    margin: 0 10px;
+
+    p {
+      font-family: "American Typewriter";
+      color: #333333;
+    }
+
+    .auth-wrapper {
+      background-color: #cbcbcb;
+      border: 2px dotted blue;
+      margin: 20px 0;
+      padding: 20px;
+      font-family: "Helvetica Neue";
+      max-width: 300px;
+      border-radius: 3px;
+
+      .auth-header {
+        display: block;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .auth-input-wrapper {
+        padding: 0 5px;
+        height: 35px;
+
+        input {
+          border-radius: 3px;
+          background-color: transparent;
+          border: 1px solid black;
+          margin-left: 8px;
+          padding: 5px;
+          float: right;
+        }
+      }
+
+      $submit-button-color: green;
+      .auth-submit-button {
+        cursor: pointer;
+        background-color: white;
+        color: $submit-button-color;
+        border: 1px dotted $submit-button-color;
+        border-radius: 4px;
+        margin: auto;
+        width: 100px;
+        text-align: center;
+
+        span {
+          padding: 15px 0;
+          display: block;
+        }
+        &:hover {
+          background-color: $submit-button-color;
+          color: white;
+          border: 1px solid $submit-button-color;
+        }
+      }
+    }
   }
 }

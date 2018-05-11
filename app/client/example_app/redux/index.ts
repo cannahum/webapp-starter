@@ -1,15 +1,15 @@
 import { createStore, combineReducers, Store, Reducer } from 'redux';
 import { CounterReducer as counter, ICounterReducer } from './reducers/counter';
-import { LinkReducer as link, ILinkReducer } from './reducers/link';
+import { authReducer as auth, IAuthReducer } from './reducers/auth';
 
 export interface IReducers {
   counter: ICounterReducer;
-  link: ILinkReducer;
+  auth: IAuthReducer;
 }
 
 const reducers: Reducer<IReducers> = combineReducers({
   counter,
-  link,
+  auth,
 });
 
 export const store: Store<IReducers> = createStore(

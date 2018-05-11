@@ -28,8 +28,8 @@ export default class App extends React.Component<any, IAppState> {
     return (
       <div>
         {
-          components.map((Comp: any) => {
-            return <Comp/>;
+          components.map((COMP: any) => {
+            return <COMP/>;
           })
         }
       </div>
@@ -38,7 +38,7 @@ export default class App extends React.Component<any, IAppState> {
 
   private loadDynamicComponents(): void {
     setTimeout(async () => {
-      const comp: any = await import('./example_app/App');
+      const comp: any = await import('./example_app/Example');
       this.setState({
         dynamicComponentsHaveLoaded: true,
         components: [comp.default as JSX.Element],
