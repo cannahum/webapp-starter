@@ -28,8 +28,8 @@ export default class App extends React.Component<any, IAppState> {
     return (
       <div>
         {
-          components.map((COMP: any) => {
-            return <COMP/>;
+          components.map((COMP: any, index: number) => {
+            return <COMP key={`dynamic-comp-${index}`}/>;
           })
         }
       </div>

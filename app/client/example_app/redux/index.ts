@@ -1,6 +1,6 @@
 import {
   createStore, combineReducers, applyMiddleware, Store, Reducer, Middleware, compose,
-  StoreEnhancer
+  StoreEnhancer,
 } from 'redux';
 import { routerMiddleware, routerReducer, RouterState } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
@@ -22,7 +22,7 @@ const reducers: Reducer<IApplicationState> = combineReducers<IApplicationState>(
 
 // React-Router-Redux
 // Create a history of your choosing (we're using a browser history in this case)
-const history: HHistory = createHistory();
+export const history: HHistory = createHistory();
 
 function shouldShowReduxDevTools(): boolean {
   return typeof window === 'object'

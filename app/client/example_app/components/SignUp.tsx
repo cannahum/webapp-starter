@@ -13,7 +13,7 @@ interface IOwnProps {
   [index: string]: any;
 }
 
-interface IStateProps {
+interface IStateProps extends Pick<IApplicationState, 'auth'> {
   [index: string]: any;
 }
 
@@ -26,7 +26,9 @@ const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IOwnProps> = (dispa
 });
 const mapStateToProps: MapStateToProps<IStateProps, IOwnProps, IApplicationState> =
   (state: IApplicationState): IStateProps => {
-    return {};
+    return {
+      auth: state.auth,
+    };
   };
 
 class SignUp extends React.Component<SignUpProps, {}> {
@@ -36,6 +38,7 @@ class SignUp extends React.Component<SignUpProps, {}> {
   }
 
   public render() {
+    const {auth: {fields}} = this.props;
     return (
       <div className="auth-wrapper">
         <span className="auth-header">Sign up with email and password:</span>
@@ -46,19 +49,34 @@ class SignUp extends React.Component<SignUpProps, {}> {
                    autoComplete="email"
                    placeholder="example@domain.com"
                    id="email-input"
+                   value={fields[AuthField.EMAIL] || ''}
                    onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Username:</label>
-            <input type="text" autoComplete="on" minLength={3} id="username-input" onChange={this.onFieldBlur}/>
+            <input type="text"
+                   autoComplete="on"
+                   minLength={3}
+                   id="username-input"
+                   value={fields[AuthField.USERNAME] || ''}
+                   onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Password:</label>
-            <input type="password" autoComplete="on" id="password-input" minLength={8} onChange={this.onFieldBlur}/>
+            <input type="password"
+                   autoComplete="on"
+                   id="password-input"
+                   minLength={8}
+                   value={fields[AuthField.PASSWORD] || ''}
+                   onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-input-wrapper">
             <label>Verify Password:</label>
-            <input type="password" autoComplete="on" id="password-verify-input" minLength={8}
+            <input type="password"
+                   autoComplete="on"
+                   id="password-verify-input"
+                   minLength={8}
+                   value={fields[AuthField.PASSWORD_VERIFY] || ''}
                    onChange={this.onFieldBlur}/>
           </div>
           <div className="auth-submit-button">
