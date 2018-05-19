@@ -21,7 +21,7 @@ class Home extends React.Component<HomeProps> {
       <React.Fragment>
         <div id="example-app-subheader">
           <h3>Simple Example App</h3>
-          <div>
+          <div className="other-apps">
             {otherApps.map(({ name, path }) => (
               <h3 key={path} onClick={(_e: React.SyntheticEvent<HTMLElement>) => navigateTo(path)}>
                 {name}

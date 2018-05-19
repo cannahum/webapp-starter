@@ -4,28 +4,29 @@ import { History as HHistory } from 'history';
 import createHistory from 'history/createBrowserHistory';
 import { isNull } from 'util';
 
-enum ExampleApp {
-  SIMPLE = 'simple',
-  GRAPHQL = 'graphql',
-}
-
 interface IAppState {
   dynamicComponentsHaveLoaded: boolean;
   components: null | JSX.Element[];
   exampleApp: ExampleApp | null;
 }
 
+enum ExampleApp {
+  SIMPLE = 'simple',
+  GRAPHQL = 'graphql',
+}
+
 export interface IExampleAppConfig {
-  name: ExampleApp;
+  name: string;
   path: string;
 }
 
+type OtherApps = IExampleAppConfig[];
+
 export interface IMandatoryProps {
-  otherApps: IExampleAppConfig[];
+  otherApps: OtherApps;
 }
 
 const history: HHistory = createHistory();
-(window as any).hhh = history;
 
 export default class App extends React.Component<any, IAppState> {
   constructor(props: any) {
@@ -49,6 +50,7 @@ export default class App extends React.Component<any, IAppState> {
           <h2>Loading... Please wait</h2>
         );
       }
+
       return (
         <div>
           <div id="example-app-header">
@@ -58,7 +60,7 @@ export default class App extends React.Component<any, IAppState> {
             components.map((COMP: any, index: number) => {
               return <COMP key={`dynamic-comp-${index}`}
                            history={history}
-                           otherApps={[{ name: 'GraphQL Example', path: '/gql' }]}/>;
+                           otherApps={this.getOtherApps()}/>;
             })
           }
         </div>
@@ -74,6 +76,18 @@ export default class App extends React.Component<any, IAppState> {
         </div>
       </Router>
     );
+  }
+
+  private getOtherApps(): OtherApps {
+    const { exampleApp } = this.state;
+    const otherApps: OtherApps = [];
+    if (exampleApp !== ExampleApp.GRAPHQL) {
+      otherApps.push({ name: 'GraphQL Example', path: '/gql' });
+    }
+    if (exampleApp !== ExampleApp.SIMPLE) {
+      otherApps.push({ name: 'Simple Example', path: '/simple' });
+    }
+    return otherApps;
   }
 
   private loadDynamicComponents(appName: ExampleApp): void {

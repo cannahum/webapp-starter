@@ -25,6 +25,13 @@ body {
       line-height: 40px;
       margin: 0 10px;
     }
+
+    .other-apps {
+      color: #0a4682;
+      h3 {
+        cursor: pointer;
+      }
+    }
   }
 
   #example-app-content {
