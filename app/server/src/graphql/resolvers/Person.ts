@@ -59,7 +59,14 @@ export default class PersonResolver {
     try {
       const conn: Connection = await db.getConnection();
       const repo: Repository<Person> = conn.getRepository(Person);
-      return await repo.save(p);
+      const saved: Person = await repo.save(p);
+      // if this is the first ever person in the DB, then let's make them admin. Totally a DEV thing.
+      if (saved.id === 1 && process.env.NODE_ENV === 'dev') {
+        setImmediate(() => {
+          const _ = repo.update(saved.id, { authLevel: AuthLevel.ADMIN});
+        });
+      }
+      return saved;
     }
     catch (e) {
       throw new Error(e);

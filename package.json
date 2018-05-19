@@ -8,14 +8,13 @@
   "scripts": {
     "setup": "concurrently \"npm i\" \"npm i --prefix app/server\" \"npm i --prefix app/client\"",
     "setup:clean": "rm -rf node_modules && npm i && concurrently \"npm run --prefix app/server setup:clean\" \"npm run --prefix app/client setup:clean\"",
-    "start": "npm start --prefix app/server",
-    "start:dev": "npm run --prefix app/server start:dev",
+    "server:prod": "npm start --prefix app/server",
+    "server:dev": "npm run --prefix app/server start:dev",
     "server:watch": "npm run --prefix app/server server:watch",
-    "serve:dev": "concurrently \"npm run start:dev\" \"npm run server:watch\"",
-    "test": "npm test --prefix app/client",
-    "build:client:dev": "npm run --prefix app/client build:dev",
-    "build:client:watch": "npm run --prefix app/client build:watch",
-    "build:client:prod": "npm run --prefix app/client build:prod"
+    "client:test": "npm test --prefix app/client",
+    "client:prod": "npm run --prefix app/client build:prod",
+    "client:dev": "npm run --prefix app/client build:dev",
+    "client:watch": "npm run --prefix app/client build:watch"
   },
   "devDependencies": {
     "concurrently": "^3.5.1",

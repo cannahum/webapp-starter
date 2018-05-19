@@ -56,6 +56,8 @@ class App {
           APP_SECRET,
         } as IAppContext,
       })));
+      // All unmatched routes go back to base route.
+      exp.use('*', (req: Request, res: Response) => res.redirect('/'));
     }
     catch (e) {
       console.log(Chalk.red('Could not build graphql schema'));
