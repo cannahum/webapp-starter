@@ -56,8 +56,8 @@ class App {
           APP_SECRET,
         } as IAppContext,
       })));
-      // All unmatched routes go back to base route.
-      exp.use('*', (req: Request, res: Response) => res.redirect('/'));
+      // All unmatched routes can be treated as base route. Maybe front-end knows what to do with it.
+      exp.use('*', (req: Request, res: Response) => res.sendFile(indexHtml));
     }
     catch (e) {
       console.log(Chalk.red('Could not build graphql schema'));

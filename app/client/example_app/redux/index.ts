@@ -1,5 +1,11 @@
 import {
-  createStore, combineReducers, applyMiddleware, Store, Reducer, Middleware, compose,
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  Store,
+  Reducer,
+  Middleware,
+  compose,
   StoreEnhancer,
 } from 'redux';
 import { routerMiddleware, routerReducer, RouterState } from 'react-router-redux';
@@ -39,7 +45,7 @@ const composeEnhancers: (params: any) => StoreEnhancer = shouldShowReduxDevTools
 const middlewares: Middleware[] = [
   routerMiddleware(history),
 ];
-const enhancer = composeEnhancers(
+const enhancer: StoreEnhancer = composeEnhancers(
   applyMiddleware(...middlewares),
 );
 
