@@ -9,8 +9,8 @@
     "setup": "concurrently \"npm i\" \"npm i --prefix app/server\" \"npm i --prefix app/client\"",
     "setup:clean": "rm -rf node_modules && npm i && concurrently \"npm run --prefix app/server setup:clean\" \"npm run --prefix app/client setup:clean\"",
     "start": "npm start --prefix app/server",
-    "server:watch": "npm run --prefix app/server server:watch",
     "start:dev": "npm run --prefix app/server start:dev",
+    "server:watch": "npm run --prefix app/server server:watch",
     "serve:dev": "concurrently \"npm run start:dev\" \"npm run server:watch\"",
     "test": "npm test --prefix app/client",
     "build:client:dev": "npm run --prefix app/client build:dev",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
+    "gulp-nodemon": "^2.2.1",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3"
   }
