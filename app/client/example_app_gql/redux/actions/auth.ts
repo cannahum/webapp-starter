@@ -27,7 +27,6 @@ interface IAuthActionType<T> extends Action<AuthActionTypes> {
 
 export interface IAuthAction extends IAuthActionType<IAuthActionPayload | null> {
   type: AuthActionTypes;
-  payload: IAuthActionPayload | null;
 }
 
 export const updateField = (p: IAuthActionPayload): IAuthAction => {

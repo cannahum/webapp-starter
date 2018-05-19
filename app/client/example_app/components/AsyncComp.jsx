@@ -4,6 +4,8 @@ export default class AsyncComp extends Component {
   constructor(props) {
     super(props);
 
+    this.isUnmounted = false;
+
     this.state = {
       isLoading: false,
       isLoaded: false,
@@ -14,10 +16,16 @@ export default class AsyncComp extends Component {
     this.loadComponent();
   }
 
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
+
   render() {
     const {isLoading, isLoaded} = this.state;
     return (
-      <div>
+      <div className="example-app-content-section">
+        <p>This is a JSX component that keeps its internal state</p>
+        <p>It also uses async / await!</p>
         {
           isLoaded
             ? <h1>I am Loaded!</h1>
@@ -36,7 +44,7 @@ export default class AsyncComp extends Component {
     const t = () => {
       return new Promise((r) => {
         setTimeout(() => {
-          r();
+          r(!this.isUnmounted);
         }, 1 * 1000);
       });
     };
@@ -45,11 +53,13 @@ export default class AsyncComp extends Component {
       isLoading: true,
     });
 
-    await t();
+    const safeToChangeState = await t();
 
-    this.setState({
-      isLoading: false,
-      isLoaded: true
-    })
+    if (safeToChangeState) {
+      this.setState({
+        isLoading: false,
+        isLoaded: true
+      })
+    }
   }
 }

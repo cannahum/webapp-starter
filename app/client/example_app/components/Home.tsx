@@ -1,46 +1,52 @@
 import React from 'react';
-import { withRouter, RouteComponentProps, Route } from 'react-router';
-import SignUp from './SignUp';
-import LogIn from './LogIn';
+import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
+import CounterConnected from './CounterConnected';
+import AsyncComp from './AsyncComp';
+import TechStack from './TechStack';
+import { IMandatoryProps } from '../../App';
 
 interface IHomeProps {
 }
 
-type HomeProps = RouteComponentProps<any> & IHomeProps;
+type HomeProps = RouteComponentProps<any> & IHomeProps & IMandatoryProps;
 
 class Home extends React.Component<HomeProps> {
 
   public render() {
-    const {history} = this.props;
+    const { history, otherApps, match: { url } } = this.props;
     const navigateTo = (route: string): void => {
       history.push(route);
     };
     return (
-      <div id="example-app-wrapper">
-        <div id="example-app-header">
-          <h1>Welcome To The Full Stack App Starter!</h1>
+      <React.Fragment>
+        <div id="example-app-subheader">
+          <h3>Simple Example App</h3>
+          <div>
+            {otherApps.map(({ name, path }) => (
+              <h3 key={path} onClick={(_e: React.SyntheticEvent<HTMLElement>) => navigateTo(path)}>
+                {name}
+              </h3>
+            ))}
+          </div>
         </div>
         <div id="example-app-content">
-          <p>
-            In this example, you will be able to see the full flow that already exists as an example app
-          </p>
-          <p>
-            Create a user, or login with an existing user. If you've configured the DB connection correctly,
-            this should work. Then create posts.
-          </p>
-          <div className="navigate-to-auth" onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('signup')}>
-            Go To Sign Up
+          <AsyncComp/>
+          <div className="example-app-content-section">
+            <p>With React Router, you can navigate to the connected counter component</p>
+            {history.location.pathname !== '/counter'
+              ? (
+                <div className="navigate-button"
+                     onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo(`${url}/counter`)}>
+                  Go To Counter
+                </div>
+              )
+              : null
+            }
+            <Route path={`${url}/counter`} component={CounterConnected}/>
           </div>
-          <div className="navigate-to-auth" onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo('login')}>
-            Go To Log In
-          </div>
-
-          <div>
-            <Route path="/signup" component={SignUp}/>
-            <Route path="/login" component={LogIn}/>
-          </div>
+          <TechStack/>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

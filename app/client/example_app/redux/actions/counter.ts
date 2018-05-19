@@ -1,30 +1,26 @@
-/// <reference path="./actions.d.ts" />
-import IAction = WebAppReduxActions.IAction;
+import { Action } from 'redux';
 
 export enum CounterTypes {
   INCREMENT = 'inc',
   DECREMENT = 'dec',
 }
 
-interface ICounterAction extends IAction<number> {
-  type: CounterTypes;
-  payload: number;
+interface ICounterActionType<T> extends Action<CounterTypes> {
+  payload?: T;
 }
 
-export const increment = (x: number): ICounterAction => {
+interface ICounterAction extends ICounterActionType<number> {
+  type: CounterTypes;
+}
+
+export const increment = (): ICounterAction => {
   return {
     type: CounterTypes.INCREMENT,
-    payload: x,
   };
 };
 
-export const decrement = (x: number): ICounterAction => {
+export const decrement = (): ICounterAction => {
   return {
     type: CounterTypes.DECREMENT,
-    payload: x,
   };
-};
-
-export const isCounterActionType = (x: IAction<any>): x is ICounterAction => {
-  return Object.values(CounterTypes).includes(x.type);
 };

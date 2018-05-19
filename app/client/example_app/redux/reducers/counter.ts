@@ -1,5 +1,5 @@
-import { Reducer } from 'redux';
-import { CounterTypes, isCounterActionType } from '../actions/counter';
+import { AnyAction, Reducer } from 'redux';
+import { CounterTypes } from '../actions/counter';
 
 export interface ICounterReducer {
   counter: number;
@@ -9,20 +9,26 @@ const initialState = () => ({
   counter: 0,
 });
 
-const CounterReducer: Reducer<ICounterReducer> = (state = initialState(), action: any): ICounterReducer => {
-  if (isCounterActionType(action)) {
-    let effectiveX = action.payload;
-    if (action.type === CounterTypes.DECREMENT) {
-      effectiveX *= -1;
+const counterReducer: Reducer<ICounterReducer> = (state = initialState(), action: AnyAction): ICounterReducer => {
+  const { type } = action;
+
+  switch (type) {
+    case CounterTypes.INCREMENT: {
+      return {
+        ...state,
+        counter: state.counter + 1,
+      };
     }
-    return {
-      ...state,
-      counter: state.counter + effectiveX,
-    };
-  }
-  else {
-    return state;
+    case CounterTypes.DECREMENT: {
+      return {
+        ...state,
+        counter: state.counter - 1,
+      };
+    }
+    default: {
+      return state;
+    }
   }
 };
 
-export { CounterReducer };
+export { counterReducer };
