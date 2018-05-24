@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (): JSX.Element => (
-  <div className="example-app-content-section">
+  <div>
     <h2>Technology Stack Used in Example App</h2>
     <ul>
       <li>JavaScript (ES2015 & JSX)</li>

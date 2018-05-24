@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import CounterConnected from './CounterConnected';
 import AsyncComp from './AsyncComp';
 import TechStack from './TechStack';
@@ -10,41 +10,47 @@ interface IHomeProps {
 
 type HomeProps = RouteComponentProps<any> & IHomeProps & IMandatoryProps;
 
+interface IDescriptorProps {
+  children: React.ReactNode;
+  path: string;
+}
+
+const WrappedComp: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Element => (
+  <div className="example-app-content-section">
+    <p>This component is in {props.path}</p>
+    {props.children}
+  </div>
+);
+
 class Home extends React.Component<HomeProps> {
 
   public render() {
-    const { history, otherApps, match: { url } } = this.props;
-    const navigateTo = (route: string): void => {
-      history.push(route);
-    };
+    const { otherApps } = this.props;
+    const pwd: string = '{projectDir}/app/client/example_app/components/';
     return (
       <React.Fragment>
         <div id="example-app-subheader">
           <h3>Simple Example App</h3>
           <div className="other-apps">
             {otherApps.map(({ name, path }) => (
-              <h3 key={path} onClick={(_e: React.SyntheticEvent<HTMLElement>) => navigateTo(path)}>
-                {name}
-              </h3>
+              <Link to={path} key={path}>
+                <h3>
+                  {name}
+                </h3>
+              </Link>
             ))}
           </div>
         </div>
         <div id="example-app-content">
-          <AsyncComp/>
-          <div className="example-app-content-section">
-            <p>With React Router, you can navigate to the connected counter component</p>
-            {history.location.pathname !== '/counter'
-              ? (
-                <div className="navigate-button"
-                     onClick={(e: React.SyntheticEvent<HTMLDivElement>) => navigateTo(`${url}/counter`)}>
-                  Go To Counter
-                </div>
-              )
-              : null
-            }
-            <Route path={`${url}/counter`} component={CounterConnected}/>
-          </div>
-          <TechStack/>
+          <WrappedComp path={`${pwd}AsyncComp.jsx`}>
+            <AsyncComp/>
+          </WrappedComp>
+          <WrappedComp path={`${pwd}CounterConnected.jsx`}>
+            <CounterConnected/>
+          </WrappedComp>
+          <WrappedComp path={`${pwd}TechStack.tsx`}>
+            <TechStack/>
+          </WrappedComp>
         </div>
       </React.Fragment>
     );

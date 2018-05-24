@@ -44,19 +44,22 @@ body {
       color: #333333;
     }
     .example-app-content-section {
-      padding: 20px;
-      max-width: 400px;
-      text-wrap: normal;
+      padding: 0 20px;
+      width: 400px;
+      border: 1px solid;
+      margin: 10px;
+
+      p {
+        word-wrap: break-word;
+      }
     }
 
-    #counter-wrapper {
-      .counter-action-button {
-        cursor: pointer;
-        padding: 10px;
-        margin: 10px;
-        color: wheat;
-        background-color: #333333;
-      }
+    .counter-action-button {
+      cursor: pointer;
+      padding: 10px;
+      margin: 10px;
+      color: wheat;
+      background-color: #333333;
     }
 
     .navigate-button {

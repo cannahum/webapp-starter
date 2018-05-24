@@ -23,7 +23,8 @@ export default class AsyncComp extends Component {
   render() {
     const {isLoading, isLoaded} = this.state;
     return (
-      <div className="example-app-content-section">
+      <div>
+        <h2>Async JSX Component</h2>
         <p>This is a JSX component that keeps its internal state</p>
         <p>It also uses async / await!</p>
         {
