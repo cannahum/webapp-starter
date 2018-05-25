@@ -17,16 +17,18 @@ const httpLink: ApolloLink = createHttpLink({
 });
 
 const cache = new InMemoryCache() as ApolloCache<NormalizedCacheObject>;
-const state: ClientStateConfig = {
+const state = {
   ...auth,
   ...counter,
+  cache,
 };
+const stateLink: ApolloLink = withClientState(state);
 
 export const createClient = (): ApolloClient<IAppState> => {
   return new ApolloClient<any>({
     cache,
     link: ApolloLink.from([
-      withClientState(state),
+      stateLink,
       httpLink,
     ]),
   });

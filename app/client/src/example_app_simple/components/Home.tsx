@@ -15,7 +15,7 @@ interface IDescriptorProps {
   path: string;
 }
 
-const WrappedComp: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Element => (
+const WRAPPED: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Element => (
   <div className="example-app-content-section">
     <p>This component is in {props.path}</p>
     {props.children}
@@ -26,7 +26,7 @@ class Home extends React.Component<HomeProps> {
 
   public render() {
     const { otherApps } = this.props;
-    const pwd: string = '{projectDir}/app/client/example_app/components/';
+    const pwd: string = '{projectDir}/app/client/example_app_simple/components/';
     return (
       <React.Fragment>
         <div id="example-app-subheader">
@@ -42,15 +42,15 @@ class Home extends React.Component<HomeProps> {
           </div>
         </div>
         <div id="example-app-content">
-          <WrappedComp path={`${pwd}AsyncComp.jsx`}>
+          <WRAPPED path={`${pwd}AsyncComp.jsx`}>
             <AsyncComp/>
-          </WrappedComp>
-          <WrappedComp path={`${pwd}CounterConnected.jsx`}>
+          </WRAPPED>
+          <WRAPPED path={`${pwd}CounterConnected.jsx`}>
             <CounterConnected/>
-          </WrappedComp>
-          <WrappedComp path={`${pwd}TechStack.tsx`}>
+          </WRAPPED>
+          <WRAPPED path={`${pwd}TechStack.tsx`}>
             <TechStack/>
-          </WrappedComp>
+          </WRAPPED>
         </div>
       </React.Fragment>
     );

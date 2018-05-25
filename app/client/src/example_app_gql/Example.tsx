@@ -5,7 +5,7 @@ import { Route, Router } from 'react-router-dom';
 import { History as HHistory } from 'history';
 import createHistory from 'history/createBrowserHistory';
 import Home from './components/Home';
-import { createClient, IAppState } from './graphql/client';
+import { createClient, IAppState } from './apollo/client';
 
 import './example.scss';
 import { IMandatoryProps } from '../App';

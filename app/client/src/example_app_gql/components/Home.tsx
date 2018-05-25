@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { IMandatoryProps } from '../../App';
+import Counter from './Counter';
+import TechStack from './TechStack';
 
 interface IHomeProps {
 }
@@ -12,7 +14,7 @@ interface IDescriptorProps {
   path: string;
 }
 
-const WrappedComp: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Element => (
+const WRAPPED: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Element => (
   <div className="example-app-content-section">
     <p>This component is in {props.path}</p>
     {props.children}
@@ -23,7 +25,7 @@ class Home extends React.Component<HomeProps> {
 
   public render() {
     const { otherApps } = this.props;
-    const pwd: string = '{projectDir}/app/client/example_app/components/';
+    const pwd: string = '{projectDir}/app/client/example_app_gql/components/';
     return (
       <React.Fragment>
         <div id="example-app-subheader">
@@ -39,7 +41,12 @@ class Home extends React.Component<HomeProps> {
           </div>
         </div>
         <div id="example-app-content">
-          Content and Components go here.
+          <WRAPPED path={`${pwd}TechStack.tsx`}>
+            <Counter />
+          </WRAPPED>
+          <WRAPPED path={`${pwd}TechStack.tsx`}>
+            <TechStack />
+          </WRAPPED>
         </div>
       </React.Fragment>
     );

@@ -35,17 +35,41 @@ body {
   }
 
   #example-app-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0 10px;
-
+    font-family: "American Typewriter";
     p {
-      font-family: "American Typewriter";
       color: #333333;
+    }
+    .example-app-content-section {
+      padding: 0 20px;
+      width: 400px;
+      border: 1px solid;
+      margin: 10px;
+
+      p {
+        word-wrap: break-word;
+      }
+    }
+
+    .counter-action-button {
+      cursor: pointer;
+      padding: 10px;
+      margin: 10px;
+      color: wheat;
+      background-color: #333333;
     }
 
     .navigate-button {
       cursor: pointer;
       display: inline-block;
       padding: 15px;
+      &:hover {
+        color: dodgerblue;
+        text-decoration: underline dodgerblue;
+      }
     }
 
     .auth-wrapper {
