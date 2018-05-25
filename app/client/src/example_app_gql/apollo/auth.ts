@@ -7,14 +7,14 @@ export interface IAuthState extends StoreObject {
 }
 
 const authResolvers = {
-  mutation: {
+  Mutation: {
     increment: (x: any, y: any, z: any) => {
       console.log(x);
       console.log(y);
       console.log(z);
     },
   },
-  query: {
+  Query: {
     getCount: (x: any, y: any, z: any) => {
       console.log(x);
       console.log(y);

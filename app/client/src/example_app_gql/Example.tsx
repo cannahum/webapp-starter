@@ -5,7 +5,7 @@ import { Route, Router } from 'react-router-dom';
 import { History as HHistory } from 'history';
 import createHistory from 'history/createBrowserHistory';
 import Home from './components/Home';
-import { createClient, IAppState } from './apollo/client';
+import { createClient } from './apollo/client';
 
 import './example.scss';
 import { IMandatoryProps } from '../App';
@@ -16,7 +16,7 @@ interface IExampleProps extends IMandatoryProps {
 
 export default class Example extends React.Component<IExampleProps> {
   private readonly history: HHistory;
-  private readonly apolloClient: ApolloClient<IAppState>;
+  private readonly apolloClient: ApolloClient<any>;
 
   constructor(props: IExampleProps) {
     super(props);
@@ -38,7 +38,6 @@ export default class Example extends React.Component<IExampleProps> {
               </Router>
             )
           }
-          Hello, graphql app.
         </div>
       </ApolloProvider>
     );

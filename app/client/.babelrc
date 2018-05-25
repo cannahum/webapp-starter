@@ -10,6 +10,7 @@
     "transform-async-to-generator",
     "babel-plugin-transform-decorators-legacy",
     "babel-plugin-transform-decorators",
+    "syntax-object-rest-spread",
     [
       "transform-runtime",
       {

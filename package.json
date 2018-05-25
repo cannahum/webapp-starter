@@ -17,6 +17,7 @@
     "client:watch": "npm run --prefix app/client build:watch"
   },
   "devDependencies": {
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "concurrently": "^3.5.1",
     "gulp-nodemon": "^2.2.1",
     "tslint": "^5.10.0",

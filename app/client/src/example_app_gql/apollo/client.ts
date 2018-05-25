@@ -5,12 +5,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { StoreObject, InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { ApolloCache } from 'apollo-cache';
 import auth, { IAuthState } from './auth';
-import counter, { ICounterState } from './counter';
-
-export interface IAppState extends StoreObject {
-  auth: IAuthState;
-  counter: ICounterState;
-}
+import counter from './counter';
 
 const httpLink: ApolloLink = createHttpLink({
   uri: '/graphql',
@@ -24,7 +19,7 @@ const state = {
 };
 const stateLink: ApolloLink = withClientState(state);
 
-export const createClient = (): ApolloClient<IAppState> => {
+export const createClient = (): ApolloClient<any> => {
   return new ApolloClient<any>({
     cache,
     link: ApolloLink.from([
