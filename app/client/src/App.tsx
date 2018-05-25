@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Redirect, Link } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 import { History as HHistory } from 'history';
 import createHistory from 'history/createBrowserHistory';
 import { isNull } from 'util';
@@ -109,7 +109,7 @@ export default class App extends React.Component<any, IAppState> {
         }
         case ExampleApp.SIMPLE:
         default: {
-          comp = import('./example_app/Example');
+          comp = import('./example_app_simple/Example');
           break;
         }
       }

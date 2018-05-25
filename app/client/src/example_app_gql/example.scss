@@ -1,5 +1,6 @@
 body {
   background-color: wheat;
+  color: #333333;
 }
 
 #example-app-wrapper {
@@ -11,6 +12,25 @@ body {
     h1 {
       line-height: 60px;
       margin: 0 10px;
+    }
+  }
+
+  #example-app-subheader {
+    background-color: #3333337d;
+    color: wheat;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      line-height: 40px;
+      margin: 0 10px;
+    }
+
+    .other-apps {
+      color: #0a4682;
+      h3 {
+        cursor: pointer;
+      }
     }
   }
 

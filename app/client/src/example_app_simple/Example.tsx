@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
 import { History as HHistory } from 'history';
 import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, push } from 'react-router-redux';
-import { IApplicationState, storeCreator } from './redux';
+import { IApplicationState, storeCreator } from './redux/';
 import { IMandatoryProps } from '../App';
 import Home from './components/Home';
 
@@ -16,13 +15,13 @@ interface IExampleProps extends IMandatoryProps {
 }
 
 export default class Example extends React.Component<IExampleProps> {
-  private store: Store<IApplicationState>;
-  private history: HHistory;
+  private readonly store: Store<IApplicationState>;
+  private readonly history: HHistory;
 
   constructor(props: IExampleProps) {
     super(props);
     const history = this.history = this.props.history || createHistory();
-    const store = this.store = storeCreator(history);
+    this.store = storeCreator(history);
   }
 
   public render() {
@@ -33,10 +32,7 @@ export default class Example extends React.Component<IExampleProps> {
             <Route render={() => <Home {...this.props}/>}/>
           ) : (
             <Router history={this.history}>
-              {/*<ConnectedRouter history={history}>*/}
-              {/*<Home/>*/}
               <Route render={() => <Home {...this.props}/>}/>
-              {/*</ConnectedRouter>*/}
             </Router>
           )
         }
