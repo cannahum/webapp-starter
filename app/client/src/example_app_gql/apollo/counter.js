@@ -4,7 +4,7 @@ import getCounter from './graphql/getCounter';
 
 const counterResolvers = {
   Mutation: {
-    updateCounter: (x, { value }, context) => {
+    updateCounter: (_, { value }, context) => {
       const cache = context.cache;
       const previousState = cache.readQuery({ query: getCounter});
       const data = {

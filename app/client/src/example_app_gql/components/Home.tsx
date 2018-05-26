@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { IMandatoryProps } from '../../App';
 import Counter from './Counter';
 import TechStack from './TechStack';
+import ShoppingList from './ShoppingList';
 
 interface IHomeProps {
 }
@@ -41,8 +42,11 @@ class Home extends React.Component<HomeProps> {
           </div>
         </div>
         <div id="example-app-content">
-          <WRAPPED path={`${pwd}TechStack.tsx`}>
+          <WRAPPED path={`${pwd}Counter.jsx`}>
             <Counter />
+          </WRAPPED>
+          <WRAPPED path={`${pwd}ShoppingList.jsx`}>
+            <ShoppingList />
           </WRAPPED>
           <WRAPPED path={`${pwd}TechStack.tsx`}>
             <TechStack />

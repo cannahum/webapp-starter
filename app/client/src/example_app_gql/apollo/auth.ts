@@ -8,18 +8,19 @@ export interface IAuthState extends StoreObject {
 
 const authResolvers = {
   Mutation: {
-    increment: (x: any, y: any, z: any) => {
-      console.log(x);
+    signup: (_: any, y: any, z: any) => {
       console.log(y);
       console.log(z);
     },
+
+    login: () => {
+
+    }
   },
   Query: {
-    getCount: (x: any, y: any, z: any) => {
-      console.log(x);
-      console.log(y);
-      console.log(z);
-    },
+    isLoggedIn: () => {
+
+    }
   },
 };
 

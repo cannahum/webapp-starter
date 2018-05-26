@@ -4,7 +4,6 @@ body {
 }
 
 #example-app-wrapper {
-
   #example-app-header {
     background-color: #333333;
     color: wheat;
@@ -14,7 +13,6 @@ body {
       margin: 0 10px;
     }
   }
-
   #example-app-subheader {
     background-color: #3333337d;
     color: wheat;
@@ -25,7 +23,6 @@ body {
       line-height: 40px;
       margin: 0 10px;
     }
-
     .other-apps {
       color: #0a4682;
       h3 {
@@ -33,7 +30,6 @@ body {
       }
     }
   }
-
   #example-app-content {
     display: flex;
     flex-direction: row;
@@ -48,12 +44,10 @@ body {
       width: 400px;
       border: 1px solid;
       margin: 10px;
-
       p {
         word-wrap: break-word;
       }
     }
-
     .counter-action-button {
       cursor: pointer;
       padding: 10px;
@@ -61,7 +55,23 @@ body {
       color: wheat;
       background-color: #333333;
     }
-
+    .shopping-item-wrapper {
+      text-transform: uppercase;
+      font-weight: bolder;
+      margin: 2px 0;
+      padding-left: 5px;
+      border: 0.5px dotted;
+      display: flex;
+      &.form {
+        flex-direction: row;
+        justify-content: space-between;
+        #shopping-item-input {
+          margin: auto;
+        } 
+        // #shopping-item-submit {
+        // }
+      }
+    }
     .navigate-button {
       cursor: pointer;
       display: inline-block;
@@ -71,7 +81,6 @@ body {
         text-decoration: underline dodgerblue;
       }
     }
-
     .auth-wrapper {
       background-color: #cbcbcb;
       border: 2px dotted blue;
@@ -80,18 +89,15 @@ body {
       font-family: "Helvetica Neue";
       max-width: 300px;
       border-radius: 3px;
-
       .auth-header {
         display: block;
         font-weight: bold;
         text-align: center;
         margin-bottom: 10px;
       }
-
       .auth-input-wrapper {
         padding: 0 5px;
         height: 35px;
-
         input {
           border-radius: 3px;
           background-color: transparent;
@@ -101,10 +107,11 @@ body {
           float: right;
         }
       }
-
       $submit-button-color: #4CAF50;
       .auth-submit-button {
-        input[type=button], input[type=submit], input[type=reset] {
+        input[type=button],
+        input[type=submit],
+        input[type=reset] {
           background-color: white;
           border: none;
           color: $submit-button-color;
@@ -112,7 +119,6 @@ body {
           text-decoration: none;
           margin: 4px 2px;
           cursor: pointer;
-
           &:hover {
             background-color: $submit-button-color;
             color: white;

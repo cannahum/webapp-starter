@@ -4,19 +4,10 @@ import { isUndefined } from 'util';
 import getCounter from '../apollo/graphql/getCounter';
 import updateCounter from '../apollo/graphql/updateCounter';
 
-interface ICounterState {
-  counter: {
-    currentCount: number;
-  }
-}
-interface ICounterProps extends ICounterState {
-  updateCounter: any;
-}
-
-class Counter extends React.Component<ICounterProps> {
-  public render() {
+class Counter extends React.Component {
+  render() {
     const { counter, updateCounter } = this.props;
-    const doUpdateCounter = (variables: any) => {
+    const doUpdateCounter = (variables) => {
       updateCounter({
         variables,
       });
@@ -40,10 +31,10 @@ class Counter extends React.Component<ICounterProps> {
 }
 
 export default compose(
-  graphql<{}, ICounterProps, {}, {}>(updateCounter, {
+  graphql(updateCounter, {
     name: 'updateCounter',
   }),
-  graphql<{}, ICounterProps, {}, {}>(getCounter, {
+  graphql(getCounter, {
     props: ({ data }) => {
       if (!isUndefined(data)) {
         const { counter } = data;
