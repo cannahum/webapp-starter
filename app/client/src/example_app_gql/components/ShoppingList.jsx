@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import Loading from './Loading';
 import getShoppingList from '../apollo/graphql/getShoppingList';
 import addNewItem from '../apollo/graphql/addNewItem';
@@ -17,7 +18,6 @@ class ShoppingList extends React.Component {
         variables: {
           itemName
         },
-        refetchQueries: ['getShoppingList']
       });
     }
   }
@@ -59,7 +59,21 @@ class ShoppingList extends React.Component {
 
 export default compose(
   graphql(addNewItem, {
-    name: 'addNewItem'
+    name: 'addNewItem',
+    options: {
+      refetchQueries: [
+        {
+          query: gql`
+            query {
+              shoppingList {
+                id,
+                itemName
+              }
+            }
+          `
+        }
+      ]
+    }
   }),
   graphql(getShoppingList),
 )(ShoppingList);

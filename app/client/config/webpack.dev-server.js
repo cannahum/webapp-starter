@@ -3,7 +3,7 @@ const devConfig = require('./webpack.dev');
 
 const newOutput = Object.assign({}, devConfig.output, {
   filename: "bundle.js",
-  publicPath: 'http://localhost:8081/',
+  publicPath: 'http://localhost:8080/',
 });
 
 module.exports = Object.assign({}, devConfig, {
