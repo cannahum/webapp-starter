@@ -1,9 +1,7 @@
 import React from 'react';
-import { withRouter, RouteComponentProps, Link, Route } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import { IMandatoryProps } from '../../App';
-import Counter from './Counter';
-import TechStack from './TechStack';
-import ShoppingList from './ShoppingList';
 
 interface IHomeProps {
 }
@@ -22,19 +20,15 @@ const WRAPPED: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Elem
   </div>
 );
 
+
 class Home extends React.Component<HomeProps> {
-
-  shouldComponentUpdate(nextProps: HomeProps): boolean {
-    return true;
-  }
-
   public render() {
     const { otherApps, match } = this.props;
-    const pwd: string = '{projectDir}/app/client/example_app_gql/components/';
+    const pwd: string = '{projectDir}/app/client/example_app_auth/components/';
     return (
       <React.Fragment>
         <div id="example-app-subheader">
-          <h3>GraphQL Example App</h3>
+          <h3>GraphQL Auth Example App</h3>
           <div className="other-apps">
             {otherApps.map(({ name, path }) => (
               <Link to={path} key={path}>
@@ -46,15 +40,6 @@ class Home extends React.Component<HomeProps> {
           </div>
         </div>
         <div id="example-app-content">
-          <WRAPPED path={`${pwd}Counter.jsx`}>
-            <Counter/>
-          </WRAPPED>
-          <WRAPPED path={`${pwd}ShoppingList.jsx`}>
-            <ShoppingList/>
-          </WRAPPED>
-          <WRAPPED path={`${pwd}TechStack.tsx`}>
-            <TechStack/>
-          </WRAPPED>
         </div>
       </React.Fragment>
     );

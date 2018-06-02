@@ -13,6 +13,7 @@ interface IAppState {
 enum ExampleApp {
   SIMPLE = 'simple',
   GRAPHQL = 'graphql',
+  AUTH = 'auth',
 }
 
 export interface IExampleAppConfig {
@@ -73,6 +74,7 @@ export default class App extends React.Component<any, IAppState> {
           <Route exact path="/" component={() => <Redirect to="/simple"/>}/>
           <Route path="/simple" component={() => getExampleApp(ExampleApp.SIMPLE)}/>
           <Route path="/gql" component={() => getExampleApp(ExampleApp.GRAPHQL)}/>
+          <Route path="/auth" component={() => getExampleApp(ExampleApp.AUTH)}/>
         </div>
       </Router>
     );
@@ -86,6 +88,9 @@ export default class App extends React.Component<any, IAppState> {
     }
     if (exampleApp !== ExampleApp.SIMPLE) {
       otherApps.push({ name: 'Simple Example', path: '/simple' });
+    }
+    if (exampleApp !== ExampleApp.AUTH) {
+      otherApps.push({ name: 'Auth Example', path: '/auth'});
     }
     return otherApps;
   }
@@ -105,6 +110,10 @@ export default class App extends React.Component<any, IAppState> {
       switch (appName) {
         case ExampleApp.GRAPHQL: {
           comp = import('./example_app_gql/Example');
+          break;
+        }
+        case ExampleApp.AUTH: {
+          comp = import('./example_app_auth/Example');
           break;
         }
         case ExampleApp.SIMPLE:
