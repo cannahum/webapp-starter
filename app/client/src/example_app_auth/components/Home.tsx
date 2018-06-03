@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { IMandatoryProps } from '../../App';
+import Auth from './Auth';
 
 interface IHomeProps {
 }
@@ -40,6 +41,9 @@ class Home extends React.Component<HomeProps> {
           </div>
         </div>
         <div id="example-app-content">
+          <WRAPPED path={`${pwd}Auth.jsx`}>
+            <Auth />
+          </WRAPPED>
         </div>
       </React.Fragment>
     );

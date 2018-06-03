@@ -2,7 +2,7 @@ import { StoreObject } from 'apollo-cache-inmemory';
 import { ClientStateConfig } from 'apollo-link-state';
 
 export interface IAuthState extends StoreObject {
-  loggedIn: boolean;
+  isLoggedIn: boolean;
   authToken?: string;
 }
 
@@ -26,9 +26,11 @@ const authResolvers = {
 
 const auth: ClientStateConfig = {
   defaults: {
-    loggedIn: false,
-    __typename: 'AuthState',
-  } as IAuthState,
+    auth: {
+      isLoggedIn: false,
+      __typename: 'AuthState',
+    } as IAuthState,
+  },
   resolvers: authResolvers,
 };
 
