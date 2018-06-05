@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import Loading from './Loading';
 
@@ -12,9 +12,10 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
-export default class Auth extends React.Component {
+class Auth extends React.Component {
 
   render() {
+    const { location: { pathname } } = this.props;
     const getAuthLinks = (isLoggedIn) => {
       if (isLoggedIn) {
         return <Link to={'/logout'}>Log Out</Link>;
@@ -22,12 +23,20 @@ export default class Auth extends React.Component {
 
       return (
         <div>
-          <p>
-            <Link to={'/auth/login'}>Log In</Link>
-          </p>
-          <p>
-            <Link to={'/auth/signup'}>Sign Up</Link>
-          </p>
+          {pathname.indexOf('/auth/login') === -1
+            ? (
+              <p>
+                <Link to={'/auth/login'}>Log In</Link>
+              </p>
+            ) : null
+          }
+          {pathname.indexOf('/auth/signup') === -1
+            ? (
+              <p>
+                <Link to={'/auth/signup'}>Sign Up</Link>
+              </p>
+            ) : null
+          }
         </div>
       );
     };
@@ -56,3 +65,5 @@ export default class Auth extends React.Component {
     );
   }
 }
+
+export default withRouter(Auth);
