@@ -26,17 +26,24 @@ export default class Example extends React.Component<IExampleProps> {
 
   public render() {
 
+    const getChildren = (): JSX.Element => (
+      <Route>
+        <div>
+          <Home {...this.props}/>
+        </div>
+      </Route>
+    );
+
     return (
       <ApolloProvider client={this.apolloClient}>
         <div>
           {this.props.history
             ? (
-              <Route render={() => <Home {...this.props}/>}/>
-            ) : (
+              getChildren()
+            )
+            : (
               <Router history={this.history}>
-                <Route render={() => <Home {...this.props}/>}/>
-                <Route path="/login" render={() => <Home {...this.props}/>}/>
-                <Route path="/signup" render={() => <Home {...this.props}/>}/>
+                {getChildren()}
               </Router>
             )
           }

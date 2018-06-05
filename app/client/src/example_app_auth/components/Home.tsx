@@ -1,8 +1,10 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { Route, withRouter } from 'react-router';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import { IMandatoryProps } from '../../App';
 import Auth from './Auth';
+import Login from './Login';
+import Signup from './Signup';
 
 interface IHomeProps {
 }
@@ -20,7 +22,6 @@ const WRAPPED: React.SFC<IDescriptorProps> = (props: IDescriptorProps): JSX.Elem
     {props.children}
   </div>
 );
-
 
 class Home extends React.Component<HomeProps> {
   public render() {
@@ -44,6 +45,8 @@ class Home extends React.Component<HomeProps> {
           <WRAPPED path={`${pwd}Auth.jsx`}>
             <Auth />
           </WRAPPED>
+          <Route exact path="/auth/login" render={() => <Login/>}/>
+          <Route exact path="/auth/signup" render={() => <Signup/>}/>
         </div>
       </React.Fragment>
     );
