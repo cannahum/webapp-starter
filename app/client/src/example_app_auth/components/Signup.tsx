@@ -1,23 +1,31 @@
-import React from 'react';
-import AbstractAuth from './AbstractAuth';
+import React, { FormEvent } from 'react';
+import { compose, graphql, MutationFn } from 'react-apollo';
+import AbstractAuth, { IAuthProps } from './AbstractAuth';
+import { IAuthForm } from "../apollo/auth";
+import updateForm from "../apollo/graphql/updateForm";
+import getAuthForm from "../apollo/graphql/getAuthForm";
+import { isNullOrUndefined } from "util";
 
-interface ISignupProps {}
+interface ISignupProps extends IAuthForm, IAuthProps {
+}
 
-export default class Signup extends AbstractAuth<ISignupProps> {
+class Signup extends AbstractAuth<ISignupProps> {
 
   constructor(props: ISignupProps) {
     super(props);
   }
 
-  protected submit(): any {
-    console.log('Signup submit!');
-  }
-
-  render() {
+  public renderForm(mutationFn: MutationFn) {
     return (
       <div className="auth-wrapper">
         <span className="auth-header">Sign up with email and password:</span>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={(e: FormEvent<HTMLFormElement>) => mutationFn({
+          variables: {
+            email: 'cannahum@me.com',
+            password: '123123123',
+            username: 'cannahum'
+          }
+        })}>
           {this.getEmailInput()}
           {this.getUsernameInput()}
           {this.getPasswordInput()}
@@ -27,4 +35,27 @@ export default class Signup extends AbstractAuth<ISignupProps> {
       </div>
     );
   }
+
+  protected isValidInputForm(): boolean {
+    const { emailAddress, password, passwordConfirmation } = this.props;
+    return emailAddress.indexOf('@') > 0
+      && password.length >= 8
+      && password === passwordConfirmation;
+  }
 }
+
+export default compose(
+  graphql(updateForm, {
+    name: 'updateForm'
+  }),
+  graphql(getAuthForm, {
+    props: ({ data }) => {
+      if (!isNullOrUndefined(data)) {
+        const authForm: IAuthForm = (data as any).authForm;
+        return {
+          ...authForm
+        };
+      }
+    }
+  })
+)(Signup);

@@ -110,9 +110,9 @@ body {
       }
       $submit-button-color: #4CAF50;
       .auth-submit-button {
-        input[type=button],
-        input[type=submit],
-        input[type=reset] {
+        button[type=button],
+        button[type=submit],
+        button[type=reset] {
           background-color: white;
           border: none;
           color: $submit-button-color;
@@ -124,6 +124,11 @@ body {
             background-color: $submit-button-color;
             color: white;
           }
+        }
+        button[type=submit]:disabled {
+          cursor: auto;
+          color: black;
+          background: grey;
         }
       }
     }
