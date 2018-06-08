@@ -3,6 +3,7 @@ import { MutationFn, graphql, compose, Mutation } from 'react-apollo';
 import AbstractAuth, { IAuthProps } from './AbstractAuth';
 import updateForm from '../apollo/graphql/updateForm';
 import getAuthForm from '../apollo/graphql/getAuthForm';
+import getAuthState from '../apollo/graphql/getAuthState';
 import { IAuthForm, IAuthState } from '../apollo/auth';
 import { isNullOrUndefined } from 'util';
 import gql from 'graphql-tag';
@@ -29,12 +30,34 @@ class Login extends AbstractAuth<ILoginProps> {
     return (
       <Mutation mutation={LOG_IN}
                 update={(cache, { data }) => {
-                  const queryResult: any | null = cache.readQuery({ query: getAuthForm });
-                  if (queryResult) {
-                    const auth: IAuthState = queryResult.auth;
-                    console.log(auth);
-                    // Result of the sign up?
-                    console.log(data);
+                  const authFormQueryResult: any | null = cache.readQuery({ query: getAuthForm });
+                  const authStateQueryResult: any | null = cache.readQuery({ query: getAuthState });
+                  const authForm: IAuthForm = authFormQueryResult.authForm;
+                  const authState: IAuthState = authStateQueryResult.auth;
+                  const { login } = data;
+                  if (login) {
+                    cache.writeData({
+                      data: {
+                        ...authFormQueryResult,
+                        authForm: {
+                          ...authForm,
+                          emailAddress: '',
+                          username: '',
+                          password: '',
+                          passwordConfirmation: '',
+                          profilePictureLink: '',
+                        } as IAuthForm,
+                        auth: {
+                          ...authState,
+                          isLoggedIn: true,
+                          authToken: login as string,
+                        } as IAuthState,
+                      },
+                    });
+                    // Success! Log the user in.
+                    const { emailAddress } = login;
+                    const { password } = authForm;
+                    return null;
                   }
                 }}>
         {(doLogin: MutationFn, { loading, error, data }) => {
@@ -89,6 +112,16 @@ export default compose(
         const authForm: IAuthForm = (data as any).authForm;
         return {
           ...authForm,
+        };
+      }
+    },
+  }),
+  graphql(getAuthState, {
+    props: ({ data }) => {
+      if (!isNullOrUndefined(data)) {
+        const authState: IAuthState = (data as any).auth;
+        return {
+          ...authState,
         };
       }
     },

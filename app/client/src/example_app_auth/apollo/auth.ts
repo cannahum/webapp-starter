@@ -71,6 +71,7 @@ const auth: ClientStateConfig = {
     } as IAuthForm,
     auth: {
       isLoggedIn: false,
+      authToken: '',
       __typename: 'AuthState',
     } as IAuthState,
   },

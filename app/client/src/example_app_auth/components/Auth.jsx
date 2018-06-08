@@ -17,9 +17,6 @@ class Auth extends React.Component {
   render() {
     const { location: { pathname } } = this.props;
     const getAuthLinks = (isLoggedIn) => {
-      if (isLoggedIn) {
-        return <Link to={'/logout'}>Log Out</Link>;
-      }
 
       return (
         <div>

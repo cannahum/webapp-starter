@@ -3,7 +3,6 @@ import { compose, graphql, Mutation, MutationFn } from 'react-apollo';
 import { isNullOrUndefined } from 'util';
 import gql from 'graphql-tag';
 import AbstractAuth, { IAuthProps } from './AbstractAuth';
-import { LOG_IN } from './Login';
 import { IAuthForm } from '../apollo/auth';
 import updateForm from '../apollo/graphql/updateForm';
 import getAuthForm from '../apollo/graphql/getAuthForm';
@@ -37,18 +36,13 @@ class Signup extends AbstractAuth<ISignupProps> {
                   const queryResult: any | null = cache.readQuery({ query: getAuthForm });
                   if (queryResult) {
                     const authForm: IAuthForm = queryResult.authForm;
-                    console.log(authForm);
-                    // Result of the sign up?
                     const { signup } = data;
                     if (signup) {
-                      // Success! Log the user in.
-                      const { emailAddress } = signup;
-                      const { password } = authForm;
                       cache.writeData({
                         data: {
                           ...queryResult,
                           authForm: {
-                            ...queryResult.authForm,
+                            ...authForm,
                             emailAddress: '',
                             username: '',
                             password: '',
@@ -57,6 +51,9 @@ class Signup extends AbstractAuth<ISignupProps> {
                           } as IAuthForm,
                         },
                       });
+                      // Success! Log the user in.
+                      const { emailAddress } = signup;
+                      const { password } = authForm;
                       return null;
                     }
                   }
