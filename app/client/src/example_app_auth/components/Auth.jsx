@@ -12,11 +12,34 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
+const ME = gql`
+  {
+    me {
+      username,
+      emailAddress,
+      profilePictureLink
+    }
+  }
+`;
+
 class Auth extends React.Component {
 
   render() {
     const { location: { pathname } } = this.props;
     const getAuthLinks = (isLoggedIn) => {
+      if (isLoggedIn) {
+        return (
+          <Query query={ME}>
+            {({ loading, error, data }) => {
+              return (
+                <p>
+                  <Link to={'/auth/posts'}>Get Posts (only if you're logged in)</Link>
+                </p>
+              );
+            }}
+          </Query>
+        );
+      }
 
       return (
         <div>

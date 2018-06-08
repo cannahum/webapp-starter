@@ -54,9 +54,6 @@ class Login extends AbstractAuth<ILoginProps> {
                         } as IAuthState,
                       },
                     });
-                    // Success! Log the user in.
-                    const { emailAddress } = login;
-                    const { password } = authForm;
                     return null;
                   }
                 }}>

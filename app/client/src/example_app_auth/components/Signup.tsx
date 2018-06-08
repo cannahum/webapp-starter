@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react';
 import { compose, graphql, Mutation, MutationFn } from 'react-apollo';
 import { isNullOrUndefined } from 'util';
+import { History as HHistory } from 'history';
 import gql from 'graphql-tag';
 import AbstractAuth, { IAuthProps } from './AbstractAuth';
 import { IAuthForm } from '../apollo/auth';
@@ -21,6 +22,7 @@ const SIGN_UP = gql`
 `;
 
 interface ISignupProps extends IAuthForm, IAuthProps {
+  history: HHistory;
 }
 
 class Signup extends AbstractAuth<ISignupProps> {
@@ -32,29 +34,28 @@ class Signup extends AbstractAuth<ISignupProps> {
   public render(): JSX.Element {
     return (
       <Mutation mutation={SIGN_UP}
-                update={(cache, { data }) => {
+                update={async (cache, { data }) => {
                   const queryResult: any | null = cache.readQuery({ query: getAuthForm });
                   if (queryResult) {
                     const authForm: IAuthForm = queryResult.authForm;
                     const { signup } = data;
                     if (signup) {
-                      cache.writeData({
+                      const { emailAddress } = signup;
+                      const { password } = authForm;
+                      await cache.writeData({
                         data: {
                           ...queryResult,
                           authForm: {
                             ...authForm,
-                            emailAddress: '',
+                            emailAddress,
                             username: '',
-                            password: '',
+                            password,
                             passwordConfirmation: '',
                             profilePictureLink: '',
                           } as IAuthForm,
                         },
                       });
-                      // Success! Log the user in.
-                      const { emailAddress } = signup;
-                      const { password } = authForm;
-                      return null;
+                      this.props.history.push('/auth/login');
                     }
                   }
                 }}>

@@ -43,10 +43,10 @@ class Home extends React.Component<HomeProps> {
         </div>
         <div id="example-app-content">
           <WRAPPED path={`${pwd}Auth.jsx`}>
-            <Auth />
+            <Auth/>
           </WRAPPED>
           <Route exact path="/auth/login" render={() => <Login/>}/>
-          <Route exact path="/auth/signup" render={() => <Signup/>}/>
+          <Route exact path="/auth/signup" render={() => <Signup history={this.props.history}/>}/>
         </div>
       </React.Fragment>
     );
