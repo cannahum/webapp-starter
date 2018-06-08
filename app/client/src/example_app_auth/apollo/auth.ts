@@ -12,7 +12,7 @@ export enum AuthFormField {
   PASSWORD,
   PASSWORD_CONFIRM,
   USERNAME,
-  PROFILE_PICTURE_LINK
+  PROFILE_PICTURE_LINK,
 }
 
 export interface IAuthForm extends StoreObject {
@@ -51,20 +51,11 @@ const authResolvers = {
         cache.writeData({ data });
       }
     },
-    signup: (_: any, y: any, z: any) => {
-      debugger;
-      console.log(y);
-      console.log(z);
-    },
-
-    login: () => {
-      debugger;
-    }
   },
   Query: {
     isLoggedIn: () => {
-
-    }
+      debugger;
+    },
   },
 };
 

@@ -17,7 +17,7 @@
     ],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [true, "check-module"],
-    "no-empty-interface": false,
+    "no-empty-interface": false
   },
   "rulesDirectory": []
 }
