@@ -1,18 +1,12 @@
 import { StoreObject } from 'apollo-cache-inmemory';
 import { ClientStateConfig } from 'apollo-link-state';
+import { isNullOrUndefined } from 'util';
 import getAuthForm from './graphql/getAuthForm';
+import { ApolloLink, Operation, NextLink } from 'apollo-link';
 
 export interface IAuthState extends StoreObject {
   isLoggedIn: boolean;
   authToken?: string;
-}
-
-export enum AuthFormField {
-  EMAIL_ADDRESS,
-  PASSWORD,
-  PASSWORD_CONFIRM,
-  USERNAME,
-  PROFILE_PICTURE_LINK,
 }
 
 export interface IAuthForm extends StoreObject {
@@ -20,17 +14,6 @@ export interface IAuthForm extends StoreObject {
   username: string;
   password: string;
   passwordConfirmation: string;
-  profilePictureLink?: string;
-}
-
-export interface ILoginSchema {
-  emailAddress: string;
-  password: string;
-}
-
-export interface ISignupSchema extends ILoginSchema {
-  username: string;
-  passwordConfirm: string;
   profilePictureLink?: string;
 }
 
@@ -42,7 +25,7 @@ const authResolvers = {
       if (cache) {
         const previousState = cache.readQuery({ query: getAuthForm });
         const authForm: IAuthForm = previousState.authForm || {};
-        authForm[key] = value;
+        authForm[ key ] = value;
         const data = {
           ...previousState,
           authForm,
@@ -58,6 +41,26 @@ const authResolvers = {
     },
   },
 };
+
+let authToken: string;
+export const initAuthToken = (token: string): void => {
+  authToken = token;
+};
+
+// One more link for once we have the auth token for the user.
+export const authLink = new ApolloLink(((operation: Operation, forward?: NextLink) => {
+  operation.setContext(({ headers }: any) => {
+    if (!isNullOrUndefined(authToken)) {
+      return {
+        headers: {
+          ...headers,
+          authorization: authToken,
+        },
+      };
+    }
+  });
+  return forward ? forward(operation) : null;
+}));
 
 const auth: ClientStateConfig = {
   defaults: {

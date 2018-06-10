@@ -48,6 +48,24 @@ body {
       p {
         word-wrap: break-word;
       }
+
+      #me-wrapper {
+        display: flex;
+        flex-direction: row;
+        background: beige;
+        #me-profile-picture-wrapper {
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 20px;
+          }
+        }
+        #me-content-writings {
+          p {
+            margin: 5px;
+          }
+        }
+      }
     }
     .counter-action-button {
       cursor: pointer;

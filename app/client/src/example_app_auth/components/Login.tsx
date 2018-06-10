@@ -4,7 +4,7 @@ import AbstractAuth, { IAuthProps } from './AbstractAuth';
 import updateForm from '../apollo/graphql/updateForm';
 import getAuthForm from '../apollo/graphql/getAuthForm';
 import getAuthState from '../apollo/graphql/getAuthState';
-import { IAuthForm, IAuthState } from '../apollo/auth';
+import { initAuthToken, IAuthForm, IAuthState } from '../apollo/auth';
 import { isNullOrUndefined } from 'util';
 import gql from 'graphql-tag';
 
@@ -54,12 +54,12 @@ class Login extends AbstractAuth<ILoginProps> {
                         } as IAuthState,
                       },
                     });
+                    // update the link context so every subsequent call gets the header
+                    initAuthToken(login);
                     return null;
                   }
                 }}>
         {(doLogin: MutationFn, { loading, error, data }) => {
-          console.log(data);
-
           const renderForm = (): JSX.Element => (
             <div className="auth-wrapper">
               <span className="auth-header">Log in with email and password:</span>
