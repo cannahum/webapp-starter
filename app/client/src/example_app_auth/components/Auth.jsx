@@ -29,7 +29,12 @@ class Auth extends React.Component {
           }
           return (
             <div>
-              <p>Authentication can be checked multiple ways...</p>
+              <p>Welcome to the Authentication App.</p>
+              <p>
+                For this one, you need to make sure that the GraphQL
+                server is up and running and connected to a database.
+                Sign up, log in, and log out!
+              </p>
               <p>Internal State says that we are <b>{isLoggedIn ? 'Logged In!' : 'Not Logged In'}</b></p>
               {
                 isLoggedIn
