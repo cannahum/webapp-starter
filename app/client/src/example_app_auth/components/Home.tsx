@@ -6,6 +6,7 @@ import Auth from './Auth';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
+import Logout from './Logout';
 
 interface IHomeProps {
 }
@@ -57,6 +58,11 @@ class Home extends React.Component<HomeProps> {
           <Route exact path="/auth/profile" render={() => (
             <WRAPPED path={`${pwd}Profile.jsx`}>
               <Profile history={this.props.history}/>
+            </WRAPPED>
+          )}/>
+          <Route exact path="/auth/logout" render={() => (
+            <WRAPPED path={`${pwd}Logout.jsx`}>
+              <Logout history={this.props.history}/>
             </WRAPPED>
           )}/>
         </div>

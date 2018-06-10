@@ -3,8 +3,6 @@ import gql from 'graphql-tag';
 import { Link, withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import Loading from './Loading';
-import { compose, graphql } from 'react-apollo/index';
-import logout from '../apollo/graphql/logout';
 
 const IS_LOGGED_IN = gql`
   {
@@ -15,10 +13,6 @@ const IS_LOGGED_IN = gql`
 `;
 
 class Auth extends React.Component {
-
-  onLogOut() {
-    this.props.logout();
-  };
 
   render() {
     const { location: { pathname } } = this.props;
@@ -39,7 +33,7 @@ class Auth extends React.Component {
               <p>Internal State says that we are <b>{isLoggedIn ? 'Logged In!' : 'Not Logged In'}</b></p>
               {
                 isLoggedIn
-                  ? <p><a onClick={this.onLogOut.bind(this)}>Log out</a></p>
+                  ? <Link to="/auth/logout">Log out</Link>
                   : null
               }
               <div>
@@ -66,8 +60,4 @@ class Auth extends React.Component {
   }
 }
 
-export default compose(
-  graphql(logout, {
-    name: 'logout',
-  }),
-)(withRouter(Auth));
+export default withRouter(Auth);
