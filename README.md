@@ -6,7 +6,7 @@
 * node,
 * Express,
 * TypeORM,
-* GraphQL (TypeGraphQL),
+* GraphQL (TypeGraphQL, Apollo-React),
 * React,
 * Redux,
 * Jest, 
@@ -23,8 +23,12 @@
 -- -- client/
 -- -- -- package.json
 -- -- -- config/      <= webpack configurations
--- -- -- example_app/  <= Example kitchen-sink app for may different uses
--- -- -- templates/   <= HTML templates
+-- -- -- templates/   <= HTML templates for webpack to use
+-- -- -- src/
+-- -- -- -- App.tsx
+-- -- -- -- example_app_auth/*  <= Example auth app with GraphQL and server / db integration
+-- -- -- -- example_app_gql/*  <= Example GraphQL app
+-- -- -- -- example_app_simple/*  <= Example kitchen-sink app for many different uses
 -- -- -- index.js     <= Entry Point
 -- -- -- index.scss   
 -- -- -- jest.config.js
@@ -41,6 +45,7 @@
 Clone or download the repo.
 ```bash
 git clone https://github.com/cannahum/webapp-starter.git
+cd webapp-starter/
 ```
 
 **Recommended Version of Node: 8 or above, because there is package-lock.json**
@@ -56,20 +61,28 @@ This call will remove the node_modules from the entire project, then re-install 
 Dev mode is easy to start, we need to start the server:
 
 ```bash 
-npm run start:dev
+npm run server:dev
 ```
 
 In a new instance of terminal, build the front-end code.
 ```bash
-npm run build:client:dev
+npm run client:dev
 ```
-
-Or if you'd like a process to watch the files while you develop and continuously build:
-```bash
-npm run build:client:watch
-```
-
 Then on your browser, navigate to http://localhost:3000
+
+You can have both server and client code distributions built as you develop.
+The following commands watch your file system, re-build the code and restart the process.
+```bash
+# server
+npm run server:watch
+```
+
+And in another terminal instance,
+```bash
+#client
+npm run client:watch
+```
+
 
 ## Advanced Usage (with Database)
 In order to use the full application, you need to connect the server to a database. 
