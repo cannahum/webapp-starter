@@ -1,5 +1,6 @@
 import React, { FormEvent } from 'react';
 import { MutationFn, graphql, compose, Mutation } from 'react-apollo';
+import {History as HHistory} from 'history';
 import AbstractAuth, { IAuthProps } from './AbstractAuth';
 import updateForm from '../apollo/graphql/updateForm';
 import getAuthForm from '../apollo/graphql/getAuthForm';
@@ -18,6 +19,7 @@ export const LOG_IN = gql`
 `;
 
 interface ILoginProps extends IAuthForm, IAuthProps {
+  history: HHistory;
 }
 
 class Login extends AbstractAuth<ILoginProps> {
@@ -56,6 +58,7 @@ class Login extends AbstractAuth<ILoginProps> {
                     });
                     // update the link context so every subsequent call gets the header
                     initAuthToken(login);
+                    this.props.history.push('/auth/profile');
                     return null;
                   }
                 }}>

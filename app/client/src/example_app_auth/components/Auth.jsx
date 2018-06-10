@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { Link, withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import Loading from './Loading';
+import { compose, graphql } from 'react-apollo/index';
+import logout from '../apollo/graphql/logout';
 
 const IS_LOGGED_IN = gql`
   {
@@ -12,73 +14,14 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
-const ME = gql`
-  {
-    me {
-      username,
-      emailAddress,
-      authLevel,
-      profilePictureLink
-    }
-  }
-`;
-
 class Auth extends React.Component {
+
+  onLogOut() {
+    this.props.logout();
+  };
 
   render() {
     const { location: { pathname } } = this.props;
-    const getAuthLinks = (isLoggedIn) => {
-      if (isLoggedIn) {
-        return (
-          <Query query={ME}>
-            {({ loading, error, data }) => {
-              if (loading) {
-                return <Loading/>;
-              }
-              if (error || !data.me) {
-                return <p>No ME object: {error.message}</p>
-              }
-              const { me: { username, authLevel, profilePictureLink } } = data;
-              return (
-                <div>
-                  <div id="me-wrapper">
-                    <div id="me-profile-picture-wrapper">
-                      <img src={profilePictureLink || "http://via.placeholder.com/350x150"}
-                           alt="profilePictureLink"
-                           id="me-profile-picture"/>
-                    </div>
-                    <div id="me-content-writings">
-                      <p>{username}</p>
-                      <p>Authorization Power: {authLevel}</p>
-                    </div>
-                  </div>
-                  <Link to={'/auth/posts'}>Get Posts (only if you're logged in)</Link>
-                </div>
-              );
-            }}
-          </Query>
-        );
-      }
-
-      return (
-        <div>
-          {pathname.indexOf('/auth/login') === -1
-            ? (
-              <p>
-                <Link to={'/auth/login'}>Log In</Link>
-              </p>
-            ) : null
-          }
-          {pathname.indexOf('/auth/signup') === -1
-            ? (
-              <p>
-                <Link to={'/auth/signup'}>Sign Up</Link>
-              </p>
-            ) : null
-          }
-        </div>
-      );
-    };
 
     return (
       <Query query={IS_LOGGED_IN}>
@@ -94,8 +37,26 @@ class Auth extends React.Component {
             <div>
               <p>Authentication can be checked multiple ways...</p>
               <p>Internal State says that we are <b>{isLoggedIn ? 'Logged In!' : 'Not Logged In'}</b></p>
+              {
+                isLoggedIn
+                  ? <p><a onClick={this.onLogOut.bind(this)}>Log out</a></p>
+                  : null
+              }
               <div>
-                {getAuthLinks(isLoggedIn)}
+                {pathname.indexOf('/auth/login') === -1 && !isLoggedIn
+                  ? (
+                    <p>
+                      <Link to={'/auth/login'}>Log In</Link>
+                    </p>
+                  ) : null
+                }
+                {pathname.indexOf('/auth/signup') === -1 && !isLoggedIn
+                  ? (
+                    <p>
+                      <Link to={'/auth/signup'}>Sign Up</Link>
+                    </p>
+                  ) : null
+                }
               </div>
             </div>
           );
@@ -105,4 +66,8 @@ class Auth extends React.Component {
   }
 }
 
-export default withRouter(Auth);
+export default compose(
+  graphql(logout, {
+    name: 'logout',
+  }),
+)(withRouter(Auth));

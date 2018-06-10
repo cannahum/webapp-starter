@@ -5,6 +5,7 @@ import { IMandatoryProps } from '../../App';
 import Auth from './Auth';
 import Login from './Login';
 import Signup from './Signup';
+import Profile from './Profile';
 
 interface IHomeProps {
 }
@@ -45,8 +46,19 @@ class Home extends React.Component<HomeProps> {
           <WRAPPED path={`${pwd}Auth.jsx`}>
             <Auth/>
           </WRAPPED>
-          <Route exact path="/auth/login" render={() => <Login/>}/>
-          <Route exact path="/auth/signup" render={() => <Signup history={this.props.history}/>}/>
+          <Route exact path="/auth/login" render={() => (
+            <WRAPPED path={`${pwd}Login.tsx`}>
+              <Login history={this.props.history}/>
+            </WRAPPED>)}/>
+          <Route exact path="/auth/signup" render={() => (
+            <WRAPPED path={`${pwd}Signup.tsx`}>
+              <Signup history={this.props.history}/>
+            </WRAPPED>)}/>
+          <Route exact path="/auth/profile" render={() => (
+            <WRAPPED path={`${pwd}Profile.jsx`}>
+              <Profile history={this.props.history}/>
+            </WRAPPED>
+          )}/>
         </div>
       </React.Fragment>
     );

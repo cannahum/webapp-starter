@@ -1,12 +1,13 @@
 import { StoreObject } from 'apollo-cache-inmemory';
 import { ClientStateConfig } from 'apollo-link-state';
+import { ApolloLink, Operation, NextLink } from 'apollo-link';
 import { isNullOrUndefined } from 'util';
 import getAuthForm from './graphql/getAuthForm';
-import { ApolloLink, Operation, NextLink } from 'apollo-link';
+import getAuthState from './graphql/getAuthState';
 
 export interface IAuthState extends StoreObject {
   isLoggedIn: boolean;
-  authToken?: string;
+  authToken: string;
 }
 
 export interface IAuthForm extends StoreObject {
@@ -34,17 +35,34 @@ const authResolvers = {
         cache.writeData({ data });
       }
     },
-  },
-  Query: {
-    isLoggedIn: () => {
-      debugger;
+    logout: (_: any, _data: null, context: any) => {
+      console.log('authResolvers::logout');
+      const { cache } = context;
+      const previousState = cache.readQuery({ query: getAuthState });
+      if (cache) {
+        cache.writeData({
+          data: {
+            ...previousState,
+            auth: {
+              ...previousState.auth,
+              isLoggedIn: false,
+              authToken: '',
+            } as IAuthState,
+          },
+        });
+        removeAuthToken();
+      }
+      return null;
     },
   },
 };
 
-let authToken: string;
+let authToken: string | null;
 export const initAuthToken = (token: string): void => {
   authToken = token;
+};
+const removeAuthToken = (): void => {
+  authToken = null;
 };
 
 // One more link for once we have the auth token for the user.
