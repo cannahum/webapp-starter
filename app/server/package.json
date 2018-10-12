@@ -7,7 +7,7 @@
   "author": "Can Nahum <Can_Nahum@intuit.com>",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "chalk": "^2.4.0",
     "class-validator": "^0.8.5",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^1.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.16.8",
     "@types/chai": "^4.1.2",
     "@types/dotenv": "^4.0.3",

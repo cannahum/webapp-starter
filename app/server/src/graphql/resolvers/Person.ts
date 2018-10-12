@@ -1,6 +1,6 @@
 import { Repository, Connection } from 'typeorm';
 import { Resolver, Query, Mutation, Arg, Ctx, Authorized } from 'type-graphql';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { IAppContext, IAuthorizedAppContext } from '../../App';
