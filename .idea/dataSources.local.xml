@@ -2,7 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="PostgreSQL - postgres@localhost" uuid="f38d42d4-88df-4a64-9ce4-fe2ae2e5a579">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
       <secret-storage>master_key</secret-storage>
       <first-sync>true</first-sync>
     </data-source>

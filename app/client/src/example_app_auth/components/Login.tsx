@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { MutationFn, graphql, compose, Mutation } from 'react-apollo';
-import {History as HHistory} from 'history';
+import { History as HHistory } from 'history';
 import AbstractAuth, { IAuthProps } from './AbstractAuth';
 import updateForm from '../apollo/graphql/updateForm';
 import getAuthForm from '../apollo/graphql/getAuthForm';
